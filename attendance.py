@@ -18,7 +18,7 @@ import image_dehazer
 import math
 
 # Load your logo image
-logo = Image.open("cmr.png")
+logo = Image.open("e:\FINAL_PROJECT\FDP-main\cmr.png")
 
 # Display the logo and navigation bar
 st.image(logo, width=150)
@@ -40,8 +40,8 @@ def main():
         st.write(
             """
             This attendance system uses facial recognition to mark attendance for students.
-            It allows you to register new students, take attendance using live video or uploaded images, 
-            store images for each student, and view attendance records. 
+            It allows the teacher to upload images of the classroom in order to get the list of students present in the class. 
+
             """
         )
     elif choice == "Take Attendance":
@@ -60,12 +60,8 @@ def take_attendance():
     semester = st.selectbox("Select Class", options=[1, 2, 3, 4, 5, 6, 7, 8])
     section = st.selectbox("Select Section", options=["A", "B", "C", "D"])
     department = st.selectbox("Select department", options = ["CSE", "ISE", "ECE", "EEE", "AI&ML", "DS", "Mech", "Civil"])
-    option = st.radio("Select Option", ("Live Video", "Upload Image"))
-    if option == "Live Video":
-        if st.button("Take Attendance"):
-            subprocess.run(["python", "main.py"])
-            st.success('Success! Attendance marked')
-    elif option == "Upload Image":
+    option = st.radio("Select Option", ("Select","Upload Image"))
+    if option == "Upload Image":
         # Read in the uploaded image
         uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"])
         if uploaded_file is not None:
@@ -79,7 +75,7 @@ def take_attendance():
             if option == "Select":
                 input()
             if option =="No Dehazing":
-                img=img
+                img_np=np.array(img)
             if option == "DeHazing":
                 st.write("""Please wait for image to be dehazed.""")
                 img_np = np.array(img)
@@ -88,6 +84,7 @@ def take_attendance():
                 img_np = np.array(img)
                 st.subheader("DeHazed Image:")
                 st.image(img)
+            st.write("""Face Detection and Tagging in progress....""")
             print("Face Detection")
             img_loc = face_recognition.face_locations(img_np,number_of_times_to_upsample=3,model="hog")
             img_enc = face_recognition.face_encodings(img_np,known_face_locations=img_loc)
@@ -118,11 +115,13 @@ def take_attendance():
                 draw.rectangle([left,top,right,bottom], outline="red", width=3)
                 draw.rectangle((left, bottom, left + font.getbbox(best_match_name)[0] , bottom +  font.getbbox(best_match_name)[1]*1.2), fill='black')
                 draw.text((left,bottom), best_match_name, font=font )
+            st.write("""Face Detection and Tagging completed!!""")
             st.image(face_img)
             stud_list["name"].append("Unknown Faces")
             stud_list["usn"].append(cnt)
             st.subheader("Students detected from Uploaded Images are:")
             st.dataframe(pd.DataFrame(stud_list))
+            st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
 
 if __name__ == '__main__':
     main()
