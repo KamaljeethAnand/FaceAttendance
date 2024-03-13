@@ -1,6 +1,6 @@
 numpy
 cmake
-dlib==19.22.0
+dlib-bin==19.22.0
 streamlit==1.28.1
 Pillow==8.4.0
 cvzone
