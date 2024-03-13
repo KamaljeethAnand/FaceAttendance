@@ -1,4 +1,5 @@
 python3-opencv
+image_dehazer
 libgl1
 cmake
 libssl-dev
