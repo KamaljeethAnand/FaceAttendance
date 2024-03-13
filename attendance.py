@@ -113,7 +113,7 @@ def take_attendance():
                 draw = PIL.ImageDraw.Draw(face_img)
                 font = PIL.ImageFont.load_default()
                 draw.rectangle([left,top,right,bottom], outline="red", width=3)
-                draw.rectangle((left, bottom, left + font.getbbox(best_match_name)[0] , bottom +  font.getbbox(best_match_name)[1]*1.2), fill='black')
+                draw.rectangle((left, bottom, left + font.getsize(best_match_name)[0] , bottom +  font.getsize(best_match_name)[1]*1.2), fill='black')
                 draw.text((left,bottom), best_match_name, font=font )
             st.write("""Face Detection and Tagging completed!!""")
             st.image(face_img)
