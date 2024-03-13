@@ -1,5 +1,4 @@
 numpy
-cmake==3.28.0
 dlib==19.22.0
 pandas
 streamlit==1.28.1
