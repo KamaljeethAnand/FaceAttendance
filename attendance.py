@@ -19,7 +19,7 @@ import image_dehazer
 import math
 
 # Load your logo image
-logo = Image.open("e:\FINAL_PROJECT\FDP-main\cmr.png")
+logo = Image.open("cmr.png")
 
 # Display the logo and navigation bar
 st.image(logo, width=150)
