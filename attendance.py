@@ -111,7 +111,7 @@ def take_attendance():
                 # Draw and write on photo
                 top,right,bottom,left = img_loc[i]
                 draw = PIL.ImageDraw.Draw(face_img)
-                font = PIL.ImageFont.truetype("timesbd.ttf",size=max(math.floor((right-left)/6),16))
+                font = PIL.ImageFont.load_default()
                 draw.rectangle([left,top,right,bottom], outline="red", width=3)
                 draw.rectangle((left, bottom, left + font.getbbox(best_match_name)[0] , bottom +  font.getbbox(best_match_name)[1]*1.2), fill='black')
                 draw.text((left,bottom), best_match_name, font=font )
