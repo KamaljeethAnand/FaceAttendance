@@ -120,8 +120,7 @@ def take_attendance():
             stud_list["name"].append("Unknown Faces")
             stud_list["usn"].append(cnt)
             st.subheader("Students detected from Uploaded Images are:")
-            lis = stud_list.astype(str)  
-            st.dataframe(lis)
+            st.dataframe(pd.DataFrame(stud_list))
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
 
 if __name__ == '__main__':
