@@ -1,4 +1,4 @@
-image_dehazer
+image-dehazer
 python3-opencv
 libgl1
 cmake
