@@ -70,6 +70,7 @@ def take_attendance():
             img = Image.open(uploaded_file)
             img = img.convert("RGB")
             st.subheader("Uploaded Image: ")
+            img = img.resize((1920,1080))
             st.image(img)
             option = st.radio("Select Option", ("Select","DeHazing", "No Dehazing"))
             if option == "Select":
