@@ -91,7 +91,7 @@ def take_attendance():
             rf= RetinaFace.detect_faces(img)
             img_loc=[]    
             for a in rf.keys():
-                img_loc.append(tuple(faces[a]["facial_area"]))   
+                img_loc.append(tuple(rf[a]["facial_area"]))   
             img_enc = face_recognition.face_encodings(img_np,known_face_locations=img_loc)
             face_img = PIL.Image.fromarray(img_np)
             print("Face Tagging")
