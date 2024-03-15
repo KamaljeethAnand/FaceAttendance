@@ -1,5 +1,4 @@
 image-dehazer
-gdown>=3.10.1
 protobuf>=4.21.1
 typing-extensions>=3.7.3
 tensorflow>=1.9.0
