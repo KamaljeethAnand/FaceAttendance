@@ -84,13 +84,13 @@ def take_attendance():
                 HazeCorrectedImg, HazeMap = image_dehazer.remove_haze(img_np,boundaryConstraint_windowSze=3,showHazeTransmissionMap=False)
                 # img = cv2.imdecode(HazeCorrectedImg, cv2.IMREAD_COLOR)
                 # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)     
-                img = Image.fromarray(HazeCorrectedImg)
+                # img = Image.fromarray(HazeCorrectedImg)
                 img_np = np.array(HazeCorrectedImg)
                 st.subheader("DeHazed Image:")
                 st.image(HazeCorrectedImg)
             st.write("""Face Detection and Tagging in progress....""")
             print("Face Detection")
-            rf= RetinaFace.detect_faces(img)
+            rf= RetinaFace.detect_faces(img_np)
             img_loc=[]    
             for a in rf.keys():
                 img_loc.append(tuple(rf[a]["facial_area"]))   
