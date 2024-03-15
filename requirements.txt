@@ -1,4 +1,8 @@
 image-dehazer
+tensorflow
+protobuf
+typing-extensions
+retinaface
 numpy
 cmake
 dlib-bin==19.22.0
