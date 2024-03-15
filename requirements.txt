@@ -1,9 +1,5 @@
 image-dehazer
-protobuf>=4.21.1
-typing-extensions>=3.7.3
-tensorflow>=1.9.0
-retinaface
-numpy>=1.14.0
+numpy
 cmake
 dlib-bin==19.22.0
 streamlit==1.28.1
@@ -11,4 +7,3 @@ Pillow==8.4.0
 cvzone
 face_recognition @ git+https://github.com/thetoby9944/face_recognition
 pytz
-

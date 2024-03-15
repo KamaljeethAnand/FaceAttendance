@@ -15,7 +15,6 @@ import PIL.ImageFont
 from PIL import ImageOps
 import PIL.ImageDraw
 import image_dehazer
-from retinaface import RetinaFace
 import math
 
 # Load your logo image
@@ -88,10 +87,7 @@ def take_attendance():
                 st.image(img)
             st.write("""Face Detection and Tagging in progress....""")
             print("Face Detection")
-            rf= RetinaFace.detect_faces(img)
-            img_loc=[]    
-            for a in rf.keys():
-                img_loc.append(tuple(faces[a]["facial_area"]))   
+            img_loc = face_recognition.face_locations(img_np,number_of_times_to_upsample=3,model="hog")
             img_enc = face_recognition.face_encodings(img_np,known_face_locations=img_loc)
             face_img = PIL.Image.fromarray(img_np)
             print("Face Tagging")
