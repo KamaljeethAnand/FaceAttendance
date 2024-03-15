@@ -1,7 +1,7 @@
 image-dehazer
 protobuf==4.21.1
 typing-extensions>=4.3.0
-tensorflow>=1.9.0
+tensorflow==2.5.0
 retinaface
 numpy
 cmake
