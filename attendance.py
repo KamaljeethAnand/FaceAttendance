@@ -67,10 +67,8 @@ def take_attendance():
         # Read in the uploaded image
         uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"])
         if uploaded_file is not None:
-            file_bytes = uploaded_file.getvalue()
-            nparr = np.frombuffer(file_bytes, np.uint8)
-            img = Image.open(uploaded_file)
-            img = img.convert("RGB")
+            file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+            img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
             st.subheader("Uploaded Image: ")
             img = img.resize((1920,1080))
             st.image(img)
@@ -83,13 +81,15 @@ def take_attendance():
                 st.write("""Please wait for image to be dehazed.""")
                 img_np = np.array(img)
                 HazeCorrectedImg, HazeMap = image_dehazer.remove_haze(img_np,boundaryConstraint_windowSze=3,showHazeTransmissionMap=False)
-                img = Image.fromarray(HazeCorrectedImg)
+                file_bytes = np.asarray(bytearray(HazeCorrectedImg.read()), dtype=np.uint8)
+                img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)    
+                #img = Image.fromarray(HazeCorrectedImg)
                 img_np = np.array(img)
                 st.subheader("DeHazed Image:")
                 st.image(img)
             st.write("""Face Detection and Tagging in progress....""")
             print("Face Detection")
-            rf= RetinaFace.detect_faces(HazeCorrectedImg)
+            rf= RetinaFace.detect_faces(img)
             img_loc=[]    
             for a in rf.keys():
                 img_loc.append(tuple(rf[a]["facial_area"]))   
