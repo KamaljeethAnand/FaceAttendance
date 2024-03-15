@@ -84,7 +84,7 @@ def take_attendance():
                 HazeCorrectedImg, HazeMap = image_dehazer.remove_haze(img_np,boundaryConstraint_windowSze=3,showHazeTransmissionMap=False)
                 # img = cv2.imdecode(HazeCorrectedImg, cv2.IMREAD_COLOR)
                 # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)     
-                #img = Image.fromarray(HazeCorrectedImg)
+                img = Image.fromarray(HazeCorrectedImg)
                 img_np = np.array(HazeCorrectedImg)
                 st.subheader("DeHazed Image:")
                 st.image(HazeCorrectedImg)
