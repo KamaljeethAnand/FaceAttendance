@@ -71,6 +71,7 @@ def take_attendance():
             img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
             st.subheader("Uploaded Image: ")
             img = cv2.resize(img,(1920,1080))
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)     
             st.image(img)
             option = st.radio("Select Option", ("Select","DeHazing", "No Dehazing"))
             if option == "Select":
@@ -81,8 +82,8 @@ def take_attendance():
                 st.write("""Please wait for image to be dehazed.""")
                 img_np = np.array(img)
                 HazeCorrectedImg, HazeMap = image_dehazer.remove_haze(img_np,boundaryConstraint_windowSze=3,showHazeTransmissionMap=False)
-                file_bytes = np.asarray(bytearray(HazeCorrectedImg.read()), dtype=np.uint8)
-                img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)    
+                img = cv2.imdecode(HazeCorrectedImg, cv2.IMREAD_COLOR)
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)     
                 #img = Image.fromarray(HazeCorrectedImg)
                 img_np = np.array(img)
                 st.subheader("DeHazed Image:")
