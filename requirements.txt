@@ -1,5 +1,5 @@
 image-dehazer
-deepface
+retinaface
 numpy
 cmake
 dlib-bin==19.22.0
