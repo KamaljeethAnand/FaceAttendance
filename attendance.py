@@ -70,7 +70,7 @@ def take_attendance():
             file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
             img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
             st.subheader("Uploaded Image: ")
-            img = img.resize((1920,1080))
+            img = cv2.resize(img,(1920,1080))
             st.image(img)
             option = st.radio("Select Option", ("Select","DeHazing", "No Dehazing"))
             if option == "Select":
