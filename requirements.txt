@@ -1,4 +1,5 @@
 image-dehazer
+opencv-python-headless
 retina-face
 numpy
 cmake
