@@ -1,12 +1,12 @@
 image-dehazer
-protobuf==4.21.1
-typing-extensions>=3.7.3
-tensorflow==2.5.0
+protobuf
+typing-extensions
+tensorflow
 retinaface
 numpy
 cmake
 dlib-bin==19.22.0
-streamlit==1.28.1
+streamlit
 Pillow==8.4.0
 cvzone
 face_recognition @ git+https://github.com/thetoby9944/face_recognition
