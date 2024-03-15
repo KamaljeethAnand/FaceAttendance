@@ -88,7 +88,7 @@ def take_attendance():
                 st.image(img)
             st.write("""Face Detection and Tagging in progress....""")
             print("Face Detection")
-            rf= RetinaFace.detect_faces(img)
+            rf= RetinaFace.detect_faces(img_np)
             img_loc=[]    
             for a in rf.keys():
                 img_loc.append(tuple(rf[a]["facial_area"]))   
