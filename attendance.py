@@ -1,5 +1,4 @@
 import streamlit as st
-import cv2
 import os
 import base64
 import pickle
@@ -16,8 +15,8 @@ import PIL.ImageFont
 from PIL import ImageOps
 import PIL.ImageDraw
 import image_dehazer
-from retinaface import RetinaFace
 import math
+
 # Load your logo image
 logo = Image.open("cmr.png")
 
