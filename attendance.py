@@ -79,48 +79,58 @@ def take_attendance():
             if option == "Select":
                 input()
             if option =="No Dehazing":
-                img_np=np.array(img)
+                for i in img:
+                    img_np.append(np.array(i))
             if option == "DeHazing":
                 st.write("""Please wait for image to be dehazed.""")
-                img_np = np.array(img)
-                HazeCorrectedImg, HazeMap = image_dehazer.remove_haze(img_np,boundaryConstraint_windowSze=3,showHazeTransmissionMap=False)
-                img = Image.fromarray(HazeCorrectedImg)
-                img_np = np.array(img)
+                for i in img:
+                    img_np.append(np.array(i))
+                img=[]
+                img_np=[]
+                final_images=[]
+                for i in img_np:
+                    HazeCorrectedImg, HazeMap = image_dehazer.remove_haze(i,boundaryConstraint_windowSze=3,showHazeTransmissionMap=False)
+                    img.append(Image.fromarray(HazeCorrectedImg))
+                for i in img:
+                    img_np.append(np.array(i)) 
                 st.subheader("DeHazed Image:")
-                st.image(img)
+                st.image(img,channels="RGB")
             st.write("""Face Detection and Tagging in progress....""")
-            print("Face Detection")
-            img_loc = face_recognition.face_locations(img_np,number_of_times_to_upsample=3,model="hog")
-            img_enc = face_recognition.face_encodings(img_np,known_face_locations=img_loc)
-            face_img = PIL.Image.fromarray(img_np)
-            print("Face Tagging")
-            unknown_faces_location = []
-            unknown_faces_enconded = []
-            cnt=0
-            for i in range(0,len(img_enc)):
-                best_match_count = 0
-                best_match_name = "unknown"
-                for k,v in people.items():
-                    result = face_recognition.compare_faces(v,img_enc[i],tolerance=0.45)
-                    count_true = result.count(True)
-                    if  count_true > best_match_count: # To find the best person that matches with the face
-                        best_match_count = count_true
-                        best_match_name = k
-                if best_match_name != "unknown":
-                    a,b=best_match_name.split("_")
-                    stud_list["name"].append(a)
-                    stud_list["usn"].append(b)
-                else:
-                    cnt=cnt+1
+            #Face Detection
+            for x in img_np:
+                img_loc = face_recognition.face_locations(x,number_of_times_to_upsample=3,model="hog")
+                img_enc = face_recognition.face_encodings(x,known_face_locations=img_loc)
+                face_img = PIL.Image.fromarray(x)
+            #Face Tagging
+                unknown_faces_location = []
+                unknown_faces_enconded = []
+                cnt=0
+                for i in range(0,len(img_enc)):
+                    best_match_count = 0
+                    best_match_name = "unknown"
+                    for k,v in people.items():
+                        result = face_recognition.compare_faces(v,img_enc[i],tolerance=0.45)
+                        count_true = result.count(True)
+                        if  count_true > best_match_count: # To find the best person that matches with the face
+                            best_match_count = count_true
+                            best_match_name = k
+                    if best_match_name != "unknown":
+                        a,b=best_match_name.split("_")
+                        if a not in stud_list["name"]:
+                            stud_list["name"].append(a)
+                            stud_list["usn"].append(b)
+                    else:
+                        cnt=cnt+1
                 # Draw and write on photo
-                top,right,bottom,left = img_loc[i]
-                draw = PIL.ImageDraw.Draw(face_img)
-                font = PIL.ImageFont.load_default()
-                draw.rectangle([left,top,right,bottom], outline="red", width=3)
-                draw.rectangle((left, bottom, left + font.getsize(best_match_name)[0] , bottom +  font.getsize(best_match_name)[1]*1.2), fill='black')
-                draw.text((left,bottom), best_match_name, font=font )
+                    top,right,bottom,left = img_loc[i]
+                    draw = PIL.ImageDraw.Draw(face_img)
+                    font = PIL.ImageFont.load_default()
+                    draw.rectangle([left,top,right,bottom], outline="red", width=3)
+                    draw.rectangle((left, bottom, left + font.getsize(best_match_name)[0] , bottom +  font.getsize(best_match_name)[1]*1.2), fill='black')
+                    draw.text((left,bottom), best_match_name, font=font)
+                    final_images.append(face_img)
             st.write("""Face Detection and Tagging completed!!""")
-            st.image(face_img)
+            st.image(final_images)
             stud_list["name"].append("Unknown Faces")
             stud_list["usn"].append(cnt)
             st.subheader("Students detected from Uploaded Images are:")
