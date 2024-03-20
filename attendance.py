@@ -85,20 +85,20 @@ def take_attendance():
                 st.write("""Please wait for image to be dehazed.""")
                 for i in img:
                     img_np.append(np.array(i))
-                img=[]
-                img_np=[]
                 final_images=[]
+                dehaze_img=[]
+                dehaze_imgnp=[]    
                 for i in img_np:
                     HazeCorrectedImg, HazeMap = image_dehazer.remove_haze(i,boundaryConstraint_windowSze=3,showHazeTransmissionMap=False)
-                    img.append(Image.fromarray(HazeCorrectedImg))
+                    dehaze_img.append(Image.fromarray(HazeCorrectedImg))
                 for i in img:
-                    img_np.append(np.array(i)) 
+                    dehaze_img_np.append(np.array(i)) 
                 st.subheader("DeHazed Image:")
-                st.image(img,channels="RGB")
+                st.image(dehaze_img,channels="RGB")
             st.write("""Face Detection and Tagging in progress....""")
             #Face Detection
             cnt=0    
-            for x in img_np:
+            for x in dehaze_img_np:
                 img_loc = face_recognition.face_locations(x,number_of_times_to_upsample=3,model="hog")
                 img_enc = face_recognition.face_encodings(x,known_face_locations=img_loc)
                 face_img = PIL.Image.fromarray(x)
