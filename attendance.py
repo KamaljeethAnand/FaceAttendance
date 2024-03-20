@@ -84,10 +84,10 @@ def take_attendance():
             option = st.radio("Select Option", ("Select","DeHazing", "No Dehazing"))
             if option == "Select":
                 input()
-            if option =="No Dehazing":
+            elif option =="No Dehazing":
                 for i in img:
                     img_np.append(np.array(i))
-            if option == "DeHazing":
+            elif option == "DeHazing":
                 st.write("""Please wait for image to be dehazed.""")
                 for i in img:
                     img_np.append(np.array(i))
@@ -160,8 +160,7 @@ def take_attendance():
             #             stud_list["usn"].append(b)
             #         st.subheader("List of Students after Manual Attendance:")
             #         st.dataframe(pd.DataFrame(stud_list)) 
-            st.write("Do you want to add more students:")
-            opt = st.radio("Select Option", ("Select","Yes", "No"))
+            opt = st.radio("Do you want to add more students:", ("Select","Yes", "No"))
             if opt=="Select":
                 input()
             elif opt == "Yes":
@@ -175,6 +174,9 @@ def take_attendance():
                         stud_list["usn"].append(b)
                     st.subheader("List of Students after Manual Attendance:")
                     st.dataframe(pd.DataFrame(stud_list))
+            elif opt=="No":
+                st.subheader("Final List of Students:")
+                st.dataframe(pd.DataFrame(stud_list))
 
 if __name__ == '__main__':
     main()
