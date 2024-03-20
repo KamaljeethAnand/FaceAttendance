@@ -28,7 +28,8 @@ stud_list = {
         "usn":[]
 }
 local_tz = pytz.timezone('Asia/Kolkata')
-            
+now = datetime.datetime.now(local_tz)
+print(str(now.strftime("%a : %d/%b/%Y")))            
 def main():
     # st.title("Student Attendance System")
     menu = ["Home","Take Attendance"]
