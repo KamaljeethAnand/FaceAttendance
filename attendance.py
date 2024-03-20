@@ -44,7 +44,7 @@ def main():
 
             """
         )
-        st.write(str(now.strftime("%a : %d/%b/%Y"))) 
+        st.write(str(now.strftime("%a:%d/%b/%Y"))) 
     elif choice == "Take Attendance":
         take_attendance()
 # Load existing encodings and student IDs
