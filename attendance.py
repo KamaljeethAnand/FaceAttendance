@@ -63,15 +63,18 @@ def take_attendance():
     option = st.radio("Select Option", ("Select","Upload Image"))
     if option == "Upload Image":
         # Read in the uploaded image
-        uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"])
+        uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"],accept_multiple_files=True)
+        img=[]
+        img_np=[]
         if uploaded_file is not None:
-            file_bytes = uploaded_file.getvalue()
-            nparr = np.frombuffer(file_bytes, np.uint8)
-            img = Image.open(uploaded_file)
-            img = img.convert("RGB")
+            for i in uploaded_file:
+                file_bytes = i.getvalue()
+                nparr = np.frombuffer(file_bytes, np.uint8)
+                img.append(Image.open(uploaded_file))
+                #img = [x.convert("RGB") for x in img]   
+                img = [x.resize((1920,1080)) for x in img]
             st.subheader("Uploaded Image: ")
-            img = img.resize((1920,1080))
-            st.image(img)
+            st.image(img,channels="RGB")
             option = st.radio("Select Option", ("Select","DeHazing", "No Dehazing"))
             if option == "Select":
                 input()
