@@ -84,7 +84,7 @@ def manualattendance():
         elif opt=="No":
             st.subheader("Final List of Students:")
             st.dataframe(pd.DataFrame(stud_list))
-
+@st.cache_data
 def take_attendance():
     with open('encoded_people.pickle', 'rb') as filename:
         people = pickle.load(filename)
