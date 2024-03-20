@@ -128,7 +128,7 @@ def take_attendance():
                     draw.rectangle([left,top,right,bottom], outline="red", width=3)
                     draw.rectangle((left, bottom, left + font.getsize(best_match_name)[0] , bottom +  font.getsize(best_match_name)[1]*1.2), fill='black')
                     draw.text((left,bottom), best_match_name, font=font)
-                    final_images.append(face_img)
+                final_images.append(face_img)
             st.write("""Face Detection and Tagging completed!!""")
             st.image(final_images)
             stud_list["name"].append("Unknown Faces")
