@@ -145,16 +145,17 @@ def take_attendance():
             st.subheader("Students detected from Uploaded Images are:")
             st.dataframe(pd.DataFrame(stud_list))
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
-            if st.button("Manual Attendance",on_click=callback):
-                st.subheader("Manual Attendance")
-                manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
-                if st.button("Confirm"): 
-                    for ma in manual_attdn:
-                        a,b=ma.split("_")
-                    if a not in stud_list["name"]:
-                        stud_list["name"].append(a)
-                        stud_list["usn"].append(b)
-                    st.subheader("List of Students after Manual Attendance:")
-                    st.dataframe(pd.DataFrame(stud_list)) 
+            st.button("Manual Attendance",on_click=callback)
+        if st.session_state.clkd:
+            st.subheader("Manual Attendance")
+            manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
+            if st.button("Confirm"): 
+                for ma in manual_attdn:
+                    a,b=ma.split("_")
+                if a not in stud_list["name"]:
+                    stud_list["name"].append(a)
+                    stud_list["usn"].append(b)
+                st.subheader("List of Students after Manual Attendance:")
+                st.dataframe(pd.DataFrame(stud_list)) 
 if __name__ == '__main__':
     main()
