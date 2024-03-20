@@ -27,12 +27,13 @@ stud_list = {
         "name": [],
         "usn":[]
 }
+cnt=0
 absent_list=[]
 local_tz = pytz.timezone('Asia/Kolkata')
 now = datetime.datetime.now(local_tz)           
 def main():
     # st.title("Student Attendance System")
-    menu = ["Home","Take Attendance"]
+    menu = ["Home","Take Attendance","Manual Attendance"]
     choice = st.sidebar.selectbox("Select Option", menu)
 
     if choice == "Home":
@@ -48,6 +49,9 @@ def main():
         st.write(str(now.strftime("%a:%d/%b/%Y"))) 
     elif choice == "Take Attendance":
         take_attendance()
+    elif choice == "Manual Attendance":
+        manualattendance()
+
 # Load existing encodings and student IDs
 
 # New one with enhanced options
@@ -59,23 +63,27 @@ def _css_to_rect(css):
 # def callback():
 #     st.session_state.clkd=True
 def manualattendance():
-    opt = st.radio("Do you want to add more students:", ("Select","Yes", "No"))
-    if opt=="Select":
-        input()
-    elif opt == "Yes":
-        st.subheader("Manual Attendance")
-        manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
-        if len(manual_attdn)>0:
-            for ma in manual_attdn:
-                a,b=ma.split("_")
-                if a not in stud_list["name"]:
-                    stud_list["name"].append(a)
-                    stud_list["usn"].append(b)
+    if len(stud_list["name"])>0:
+        st.subheader("Students detected are:")
+        st.dataframe(pd.DataFrame(stud_list))
+        st.write("Since there are "+ str(cnt) + " unknown faces.")
+        opt = st.radio("Do you want to add more students:", ("Select","Yes", "No"))
+        if opt=="Select":
+            input()
+        elif opt == "Yes":
+            st.subheader("Manual Attendance")
+            manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
+            if len(manual_attdn)>0:
+                for ma in manual_attdn:
+                    a,b=ma.split("_")
+                    if a not in stud_list["name"]:
+                        stud_list["name"].append(a)
+                        stud_list["usn"].append(b)
                 st.subheader("List of Students after Manual Attendance:")
                 st.dataframe(pd.DataFrame(stud_list))
-    elif opt=="No":
-        st.subheader("Final List of Students:")
-        st.dataframe(pd.DataFrame(stud_list))
+        elif opt=="No":
+            st.subheader("Final List of Students:")
+            st.dataframe(pd.DataFrame(stud_list))
 
 def take_attendance():
     with open('encoded_people.pickle', 'rb') as filename:
@@ -90,7 +98,6 @@ def take_attendance():
         uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"],accept_multiple_files=True)
         img=[]
         img_np=[]
-        manual_attdn=[]
         if uploaded_file is not None and len(uploaded_file) !=0:
             for i in uploaded_file:
                 file_bytes = i.getvalue()
@@ -164,6 +171,7 @@ def take_attendance():
             st.subheader("Students detected from Uploaded Images are:")
             st.dataframe(pd.DataFrame(stud_list))
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
+            st.write("Go to Manual Attendance tab for adding more students!!!")
             # with st.form("manattdn"):
             #     manattdn=st.form_submit_button("Manual Attendance")
             # if manattdn:
@@ -179,7 +187,6 @@ def take_attendance():
             #             stud_list["usn"].append(b)
             #         st.subheader("List of Students after Manual Attendance:")
             #         st.dataframe(pd.DataFrame(stud_list))
-            manualattendance() 
             
 
 if __name__ == '__main__':
