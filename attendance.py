@@ -70,7 +70,7 @@ def take_attendance():
             for i in uploaded_file:
                 file_bytes = i.getvalue()
                 nparr = np.frombuffer(file_bytes, np.uint8)
-                img.append(Image.open(uploaded_file))
+                img.append(Image.open(i))
                 #img = [x.convert("RGB") for x in img]   
                 img = [x.resize((1920,1080)) for x in img]
             st.subheader("Uploaded Image: ")
