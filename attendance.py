@@ -58,6 +58,25 @@ def _css_to_rect(css):
 #     st.session_state.clkd=False
 # def callback():
 #     st.session_state.clkd=True
+def manualattendance():
+    opt = st.radio("Do you want to add more students:", ("Select","Yes", "No"))
+    if opt=="Select":
+        input()
+    elif opt == "Yes":
+        st.subheader("Manual Attendance")
+        manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
+        if len(manual_attdn)>0:
+            for ma in manual_attdn:
+                a,b=ma.split("_")
+                if a not in stud_list["name"]:
+                    stud_list["name"].append(a)
+                    stud_list["usn"].append(b)
+                st.subheader("List of Students after Manual Attendance:")
+                st.dataframe(pd.DataFrame(stud_list))
+    elif opt=="No":
+        st.subheader("Final List of Students:")
+        st.dataframe(pd.DataFrame(stud_list))
+
 def take_attendance():
     with open('encoded_people.pickle', 'rb') as filename:
         people = pickle.load(filename)
@@ -159,24 +178,9 @@ def take_attendance():
             #             stud_list["name"].append(a)
             #             stud_list["usn"].append(b)
             #         st.subheader("List of Students after Manual Attendance:")
-            #         st.dataframe(pd.DataFrame(stud_list)) 
-            opt = st.radio("Do you want to add more students:", ("Select","Yes", "No"))
-            if opt=="Select":
-                input()
-            elif opt == "Yes":
-                st.subheader("Manual Attendance")
-                manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
-                if len(manual_attdn)>0:
-                    for ma in manual_attdn:
-                        a,b=ma.split("_")
-                    if a not in stud_list["name"]:
-                        stud_list["name"].append(a)
-                        stud_list["usn"].append(b)
-                    st.subheader("List of Students after Manual Attendance:")
-                    st.dataframe(pd.DataFrame(stud_list))
-            elif opt=="No":
-                st.subheader("Final List of Students:")
-                st.dataframe(pd.DataFrame(stud_list))
+            #         st.dataframe(pd.DataFrame(stud_list))
+            manualattendance() 
+            
 
 if __name__ == '__main__':
     main()
