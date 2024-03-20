@@ -91,7 +91,7 @@ def take_attendance():
                 for i in img_np:
                     HazeCorrectedImg, HazeMap = image_dehazer.remove_haze(i,boundaryConstraint_windowSze=3,showHazeTransmissionMap=False)
                     dehaze_img.append(Image.fromarray(HazeCorrectedImg))
-                for i in img:
+                for i in dehaze_img:
                     dehaze_imgnp.append(np.array(i)) 
                 st.subheader("DeHazed Image:")
                 st.image(dehaze_img,channels="RGB")
