@@ -66,7 +66,7 @@ def take_attendance():
         uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"],accept_multiple_files=True)
         img=[]
         img_np=[]
-        if len(uploaded_file) != 0:
+        if uploaded_file is not None and len(uploaded_file) !=0:
             for i in uploaded_file:
                 file_bytes = i.getvalue()
                 nparr = np.frombuffer(file_bytes, np.uint8)
