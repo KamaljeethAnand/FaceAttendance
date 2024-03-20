@@ -27,6 +27,7 @@ stud_list = {
         "name": [],
         "usn":[]
 }
+absent_list=[]
 local_tz = pytz.timezone('Asia/Kolkata')
 now = datetime.datetime.now(local_tz)           
 def main():
@@ -111,11 +112,13 @@ def take_attendance():
                     best_match_name = "unknown"
                     for k,v in people.items():
                         result = face_recognition.compare_faces(v,img_enc[i],tolerance=0.45)
+                        absent_list.append(k)
                         count_true = result.count(True)
                         if  count_true > best_match_count: # To find the best person that matches with the face
                             best_match_count = count_true
                             best_match_name = k
                     if best_match_name != "unknown":
+                        absent_list.remove(best_match_name)
                         a,b=best_match_name.split("_")
                         if a not in stud_list["name"]:
                             stud_list["name"].append(a)
@@ -137,5 +140,14 @@ def take_attendance():
             st.subheader("Students detected from Uploaded Images are:")
             st.dataframe(pd.DataFrame(stud_list))
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
+            st.subheader("Manual Attendance")
+            manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
+            for ma in manual_attdn:
+                a,b=ma.split("_")
+                if a not in stud_list["name"]:
+                    stud_list["name"].append(a)
+                    stud_list["usn"].append(b)
+            st.subheader("List of Students after Manual Attendance:")
+            st.dataframe(pd.DataFrame(stud_list)) 
 if __name__ == '__main__':
     main()
