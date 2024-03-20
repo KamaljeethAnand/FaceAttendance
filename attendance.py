@@ -145,7 +145,7 @@ def take_attendance():
             st.subheader("Students detected from Uploaded Images are:")
             st.dataframe(pd.DataFrame(stud_list))
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
-            if st.button("Manual Attendance",onclick=callback):
+            if st.button("Manual Attendance",on_click=callback):
                 st.subheader("Manual Attendance")
                 manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
                 if st.button("Confirm"): 
