@@ -97,6 +97,7 @@ def take_attendance():
                 st.image(img,channels="RGB")
             st.write("""Face Detection and Tagging in progress....""")
             #Face Detection
+            cnt=0    
             for x in img_np:
                 img_loc = face_recognition.face_locations(x,number_of_times_to_upsample=3,model="hog")
                 img_enc = face_recognition.face_encodings(x,known_face_locations=img_loc)
@@ -104,7 +105,6 @@ def take_attendance():
             #Face Tagging
                 unknown_faces_location = []
                 unknown_faces_enconded = []
-                cnt=0
                 for i in range(0,len(img_enc)):
                     best_match_count = 0
                     best_match_name = "unknown"
