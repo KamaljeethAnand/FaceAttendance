@@ -28,8 +28,7 @@ stud_list = {
         "usn":[]
 }
 local_tz = pytz.timezone('Asia/Kolkata')
-now = datetime.datetime.now(local_tz)
-print(str(now.strftime("%a : %d/%b/%Y")))            
+now = datetime.datetime.now(local_tz)           
 def main():
     # st.title("Student Attendance System")
     menu = ["Home","Take Attendance"]
@@ -45,6 +44,7 @@ def main():
 
             """
         )
+        st.write(str(now.strftime("%a : %d/%b/%Y"))) 
     elif choice == "Take Attendance":
         take_attendance()
 # Load existing encodings and student IDs
