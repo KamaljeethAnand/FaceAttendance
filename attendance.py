@@ -63,7 +63,7 @@ def _css_to_rect(css):
 # def callback():
 #     st.session_state.clkd=True
 def manualattendance():
-    if len(stud_list["name"])>0:
+    if True:
         st.subheader("Students detected are:")
         st.dataframe(pd.DataFrame(stud_list))
         st.write("Since there are "+ str(cnt) + " unknown faces.")
