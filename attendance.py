@@ -69,6 +69,7 @@ def take_attendance():
         img=[]
         img_np=[]
         conf=False
+        ma_b=[]
         manual_attdn=[]
         if uploaded_file is not None and len(uploaded_file) !=0:
             for i in uploaded_file:
@@ -143,6 +144,8 @@ def take_attendance():
             st.subheader("Students detected from Uploaded Images are:")
             st.dataframe(pd.DataFrame(stud_list))
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
+            ma_b=st.button("Manual Attendance")
+        if ma_b:
             st.subheader("Manual Attendance")
             manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
             conf= st.button("Confirm")
