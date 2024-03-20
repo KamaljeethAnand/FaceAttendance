@@ -145,20 +145,36 @@ def take_attendance():
             st.subheader("Students detected from Uploaded Images are:")
             st.dataframe(pd.DataFrame(stud_list))
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
-            with st.form("manattdn"):
-                manattdn=st.form_submit_button("Manual Attendance")
-            if manattdn:
+            # with st.form("manattdn"):
+            #     manattdn=st.form_submit_button("Manual Attendance")
+            # if manattdn:
+            #     st.subheader("Manual Attendance")
+            #     with st.form("abslist"):
+            #         manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
+            #         conf=st.form_submit_button("Confirm")
+            #     if conf: 
+            #         for ma in manual_attdn:
+            #             a,b=ma.split("_")
+            #         if a not in stud_list["name"]:
+            #             stud_list["name"].append(a)
+            #             stud_list["usn"].append(b)
+            #         st.subheader("List of Students after Manual Attendance:")
+            #         st.dataframe(pd.DataFrame(stud_list)) 
+            st.write("Do you want to add more students:")
+            opt = st.radio("Select Option", ("Select","Yes", "No"))
+            if opt=="Select":
+                input()
+            elif opt == "Yes":
                 st.subheader("Manual Attendance")
-                with st.form("abslist"):
-                    manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
-                    conf=st.form_submit_button("Confirm")
-                if conf: 
+                manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
+                if len(manual_attdn)>0:
                     for ma in manual_attdn:
                         a,b=ma.split("_")
                     if a not in stud_list["name"]:
                         stud_list["name"].append(a)
                         stud_list["usn"].append(b)
                     st.subheader("List of Students after Manual Attendance:")
-                    st.dataframe(pd.DataFrame(stud_list)) 
+                    st.dataframe(pd.DataFrame(stud_list))
+
 if __name__ == '__main__':
     main()
