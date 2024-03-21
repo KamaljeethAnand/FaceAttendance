@@ -175,8 +175,12 @@ def take_attendance():
             stud_list["usn"].append(cnt)
             st.subheader("Students detected from Uploaded Images are:")
             st.dataframe(pd.DataFrame(stud_list))
+            st.subheader("Absentees:")
+            st.dataframe(pd.DataFrame(absent_list))    
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
             st.write("Go to Manual Attendance tab for adding more students!!!")
+            
+                
             # st.session_state.sl = stud_list
             # st.session_state.al = absent_list
             # with st.form("manattdn"):
