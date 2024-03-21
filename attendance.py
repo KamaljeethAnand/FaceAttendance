@@ -177,8 +177,8 @@ def take_attendance():
             st.dataframe(pd.DataFrame(stud_list))
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
             st.write("Go to Manual Attendance tab for adding more students!!!")
-            st.session_state.sl = stud_list
-            st.session_state.al = absent_list
+            # st.session_state.sl = stud_list
+            # st.session_state.al = absent_list
             # with st.form("manattdn"):
             #     manattdn=st.form_submit_button("Manual Attendance")
             # if manattdn:
