@@ -50,9 +50,9 @@ def main():
             """
         )
         st.write(str(now.strftime("%a:%d/%b/%Y"))) 
-    elif choice == "Take Attendance":
+    if choice == "Take Attendance":
         take_attendance()
-    elif choice == "Manual Attendance":
+    if choice == "Manual Attendance":
         manualattendance()
 
 # Load existing encodings and student IDs
