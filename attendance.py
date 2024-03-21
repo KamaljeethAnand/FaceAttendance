@@ -28,10 +28,13 @@ stud_list = {
         "name": [],
         "usn":[]
 }
-if 'key' not in st.session_state:
-    st.session_state['key'] = stud_list
+if 'sl' not in st.session_state:
+    st.session_state.sl = stud_list
+
 cnt=0
 absent_list=[]
+if 'al' not in st.session_state:
+    st.session_state.al = absent_list
 local_tz = pytz.timezone('Asia/Kolkata')
 now = datetime.datetime.now(local_tz)           
 def main():
@@ -59,13 +62,13 @@ def main():
 
 # New one with enhanced options
 import dlib
-def _css_to_rect(css):
-    return dlib.rectangle(css.left(), css.top(), css.right(), css.bottom())
 # if "clkd" not in st.session_state:
 #     st.session_state.clkd=False
 # def callback():
 #     st.session_state.clkd=True
 def manualattendance():
+    st.write(st.session_state.sl)
+    st.write(st.session_state.al)
     if len(st.session_state['key'])>0:
         st.subheader("Students detected are:")
         st.dataframe(pd.DataFrame(stud_list))
@@ -174,7 +177,8 @@ def take_attendance():
             st.dataframe(pd.DataFrame(stud_list))
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
             st.write("Go to Manual Attendance tab for adding more students!!!")
-            st.session_state['key'] = stud_list
+            st.session_state.sl = stud_list
+            st.session_state.al = absent_list
             # with st.form("manattdn"):
             #     manattdn=st.form_submit_button("Manual Attendance")
             # if manattdn:
