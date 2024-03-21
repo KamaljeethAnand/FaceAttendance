@@ -152,12 +152,12 @@ def take_attendance():
                             best_match_count = count_true
                             best_match_name = k
                     if best_match_name != "unknown":
-                        if best_match_name in absent_list:
-                            absent_list.remove(best_match_name)
                         a,b=best_match_name.split("_")
                         if a not in stud_list["name"]:
                             stud_list["name"].append(a)
                             stud_list["usn"].append(b)
+                        elif best_match_name in absent_list:
+                            absent_list.remove(best_match_name)
                     else:
                         cnt=cnt+1
                 # Draw and write on photo
