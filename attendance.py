@@ -67,12 +67,10 @@ import dlib
 # def callback():
 #     st.session_state.clkd=True
 def manualattendance():
-    st.write(st.session_state.sl)
-    st.write(st.session_state.al)
-    if len(st.session_state['key'])>0:
-        st.subheader("Students detected are:")
-        st.dataframe(pd.DataFrame(stud_list))
-        st.write("Since there are "+ str(cnt) + " unknown faces.")
+    if len(stud_list)>0:
+        # st.subheader("Students detected are:")
+        # st.dataframe(pd.DataFrame(stud_list))
+        # st.write("Since there are "+ str(cnt) + " unknown faces.")
         opt = st.radio("Do you want to add more students:", ("Select","Yes", "No"))
         if opt=="Select":
             input()
@@ -112,6 +110,9 @@ def take_attendance():
                 img = [x.resize((1920,1080)) for x in img]
             st.subheader("Uploaded Image: ")
             st.image(img,channels="RGB")
+            for k,v in people.items():
+                if k not in absent_list:
+                    absent_list.append(k)    
             option = st.radio("Select Option", ("Select","DeHazing", "No Dehazing"))
             if option == "Select":
                 input()
@@ -142,8 +143,6 @@ def take_attendance():
             #Face Tagging
                 unknown_faces_location = []
                 unknown_faces_enconded = []
-                for k,v in people.items():
-                    absent_list.append(k)
                 for i in range(0,len(img_enc)):
                     best_match_count = 0
                     best_match_name = "unknown"
@@ -179,7 +178,7 @@ def take_attendance():
             st.dataframe(pd.DataFrame(absent_list))    
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
             st.write("Go to Manual Attendance tab for adding more students!!!")
-            
+            manualattendance()
                 
             # st.session_state.sl = stud_list
             # st.session_state.al = absent_list
