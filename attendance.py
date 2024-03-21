@@ -111,8 +111,7 @@ def take_attendance():
             st.subheader("Uploaded Image: ")
             st.image(img,channels="RGB")
             for k,v in people.items():
-                if k not in absent_list:
-                    absent_list.append(k)    
+                absent_list.append(k)    
             option = st.radio("Select Option", ("Select","DeHazing", "No Dehazing"))
             if option == "Select":
                 input()
