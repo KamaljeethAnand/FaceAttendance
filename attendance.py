@@ -23,10 +23,13 @@ logo = Image.open("cmr.png")
 # Display the logo and navigation bar
 st.image(logo, width=150)
 # Add a welcome message and a description of the attendance system
+
 stud_list = {
         "name": [],
         "usn":[]
 }
+if 'key' not in st.session_state:
+    st.session_state['key'] = stud_list
 cnt=0
 absent_list=[]
 local_tz = pytz.timezone('Asia/Kolkata')
@@ -63,7 +66,7 @@ def _css_to_rect(css):
 # def callback():
 #     st.session_state.clkd=True
 def manualattendance():
-    if True:
+    if len(st.session_state['key'])>0:
         st.subheader("Students detected are:")
         st.dataframe(pd.DataFrame(stud_list))
         st.write("Since there are "+ str(cnt) + " unknown faces.")
@@ -171,6 +174,7 @@ def take_attendance():
             st.dataframe(pd.DataFrame(stud_list))
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
             st.write("Go to Manual Attendance tab for adding more students!!!")
+            st.session_state['key'] = stud_list
             # with st.form("manattdn"):
             #     manattdn=st.form_submit_button("Manual Attendance")
             # if manattdn:
