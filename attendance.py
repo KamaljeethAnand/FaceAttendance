@@ -56,7 +56,7 @@ def main():
     if choice == "Take Attendance":
         take_attendance()
     if choice == "Manual Attendance":
-        st.title("Here, you can take Manual Attendance of students!!!")    
+        st.title("Manual Attendance")    
         manualattendance()
 
 # Load existing encodings and student IDs
