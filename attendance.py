@@ -79,7 +79,7 @@ def manualattendance():
         "name": [],
         "usn":[]
     }   
-    if len(stud_list)>0:
+    if len(stud_list["name"])>0:
         st.subheader("Students detected are:")
         st.dataframe(pd.DataFrame(stud_list))
         st.subheader("Absentee List:")
@@ -106,8 +106,10 @@ def manualattendance():
                     if a not in stud_list["usn"]:   
                         stud_list["usn"].append(a)     
                 st.dataframe(pd.DataFrame(stud_list))
-                st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")
-                conn.create(worksheet=str(now.strftime("%a|%d/%b/%Y|%H:%M")),data=pd.DataFrame(stud_list))  
+                st.write("Attendance marked for "+ str(len(stud_list["name"])) + ".Check Google Sheets for updated list!!!")
+                conn.create(worksheet=str(now.strftime("%a|%d/%b/%Y|%H:%M")),data=pd.DataFrame(stud_list))
+                stud_list["name"]=[]
+                stud_list["usn"]=[]    
 def take_attendance():
     with open('encoded_people.pickle', 'rb') as filename:
         people = pickle.load(filename)
