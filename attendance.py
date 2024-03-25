@@ -66,7 +66,9 @@ import dlib
 #     st.session_state.clkd=False
 # def callback():
 #     st.session_state.clkd=True
-def manualattendance():
+def manualattendance(lis):
+    stud_list=lis[0]
+    absent_list=lis[1]
     if len(stud_list)>0:
         # st.subheader("Students detected are:")
         # st.dataframe(pd.DataFrame(stud_list))
@@ -178,7 +180,7 @@ def take_attendance():
             st.dataframe(pd.DataFrame(absent_list))    
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
             st.write("Go to Manual Attendance tab for adding more students!!!")
-            manualattendance()
+            st.button("Manual Attendance",on_click=manualattendance, args=[stud_list,absent_list])
                 
             # st.session_state.sl = stud_list
             # st.session_state.al = absent_list
