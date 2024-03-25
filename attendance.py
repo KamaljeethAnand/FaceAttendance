@@ -25,7 +25,7 @@ logo = Image.open("cmr.png")
 st.image(logo, width=150)
 
 # https://docs.google.com/spreadsheets/d/1lUzHTg-J13V0jxMqcd0_15WbQ7o8zSXFWi-Z03aKzng/ - EXCEL SHEET
-conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+conn = st.connection("gsheets", type=GSheetsConnection)
 stud_list = {
         "name": [],
         "usn":[]
