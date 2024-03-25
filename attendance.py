@@ -87,7 +87,7 @@ def manualattendance():
         manual_attdn=st.multiselect("Choose the students to be included:",absent_list["name"])
         if len(manual_attdn)>0:
         for ma in manual_attdn:
-                if ma not in ma_list["name"]:
+            if ma not in ma_list["name"]:
                 ma_list["name"].append(ma)
                 ma_list["usn"].append(absent_list["usn"][absent_list["name"].index(ma)])
         st.subheader("Selected Students:")
