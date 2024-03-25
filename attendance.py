@@ -92,13 +92,16 @@ def manualattendance():
                         ma_list["name"].append(a)
                         ma_list["usn"].append(b)
                 st.subheader("Selected Students:")
-                st.dataframe(pd.DataFrame(ma_list))
-                st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")    
+                st.dataframe(pd.DataFrame(ma_list))   
                 r=st.button("Confirm")
                 if r:
-                    stud_list["name"].append(ma_list["name"])
-                    stud_list["usn"].append(ma_list["usn"])
-                    st.dataframe(pd.DataFrame(ma_list))    
+                    for a in ma_list["name"]:
+                        if a not in stud_list["name"]:
+                            stud_list["name"].append(ma_list["name"])
+                            stud_list["usn"].append(ma_list["usn"])
+                    
+                    st.dataframe(pd.DataFrame(stud_list))
+                    st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")     
         elif opt=="No":
             st.subheader("Final List of Students:")
             st.dataframe(pd.DataFrame(stud_list))
