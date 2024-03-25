@@ -55,7 +55,7 @@ def main():
 
             """
         )
-        st.write(str(now.strftime("%a:%d/%b/%Y"))) 
+        st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M"))) 
     if choice == "Take Attendance":
         take_attendance()
     if choice == "Manual Attendance":
