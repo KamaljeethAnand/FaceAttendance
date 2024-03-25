@@ -82,7 +82,7 @@ def manualattendance():
         st.dataframe(pd.DataFrame(stud_list))
         st.subheader("Absentee List:")
         st.dataframe(pd.DataFrame(absent_list))    
-        st.write("Since there are "+ str(stud_list["usn"[-1]) + " unknown faces.")
+        st.write("Since there are "+ str(stud_list["usn"][-1]) + " unknown faces.")
         st.subheader("Manual Attendance")
         manual_attdn=st.multiselect("Choose the students to be included:",absent_list["name"])
         if len(manual_attdn)>0:
