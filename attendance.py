@@ -74,7 +74,7 @@ import dlib
 #     st.session_state.clkd=True
 def manualattendance():
     stud_list=st.session_state.sl
-    absent_list=st.session_state.al
+    absent_list=st.session_state.al  
     ma_list = {
         "name": [],
         "usn":[]
@@ -96,6 +96,8 @@ def manualattendance():
             st.dataframe(pd.DataFrame(ma_list))   
             r=st.button("Confirm")
             if r:
+                stud_list["usn"].remove(stud_list["usn"][stud_list["name"].index("Unknown Faces")])    
+                stud_list["name"].remove("Unknown Faces")     
                 for a in ma_list["name"]:
                     if a not in stud_list["name"]:   
                         stud_list["name"].append(a)
@@ -106,14 +108,6 @@ def manualattendance():
                 st.dataframe(pd.DataFrame(stud_list))
                 st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")
                 conn.create(worksheet=str(now.strftime("%a|%d/%b/%Y|%H:%M")),data=pd.DataFrame(stud_list))  
-        # opt = st.radio("Do you want to add more students:", ("Select","Yes", "No"))
-        # if opt=="Select":
-        #     input()
-        # elif opt == "Yes":
-                 
-        # elif opt=="No":
-        #     st.subheader("Final List of Students:")
-        #     st.dataframe(pd.DataFrame(stud_list))
 def take_attendance():
     with open('encoded_people.pickle', 'rb') as filename:
         people = pickle.load(filename)
