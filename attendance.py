@@ -23,8 +23,9 @@ logo = Image.open("cmr.png")
 
 # Display the logo and navigation bar
 st.image(logo, width=150)
-# Add a welcome message and a description of the attendance system
 
+# https://docs.google.com/spreadsheets/d/1lUzHTg-J13V0jxMqcd0_15WbQ7o8zSXFWi-Z03aKzng/ - EXCEL SHEET
+conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 stud_list = {
         "name": [],
         "usn":[]
@@ -103,7 +104,8 @@ def manualattendance():
                     if a not in stud_list["usn"]:   
                         stud_list["usn"].append(a)     
                 st.dataframe(pd.DataFrame(stud_list))
-                st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")    
+                st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")
+                conn.create(worksheet=str(now.strftime("%a|%d/%b/%Y|%H:%M")),data=pd.DataFrame(stud_list))  
         # opt = st.radio("Do you want to add more students:", ("Select","Yes", "No"))
         # if opt=="Select":
         #     input()
