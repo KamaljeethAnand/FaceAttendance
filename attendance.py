@@ -69,6 +69,10 @@ import dlib
 def manualattendance():
     stud_list=st.session_state.sl
     absent_list=st.session_state.al
+    ma_list = {
+        "name": [],
+        "usn":[]
+    }   
     if len(stud_list)>0:
         st.subheader("Students detected are:")
         st.dataframe(pd.DataFrame(stud_list))
@@ -84,11 +88,17 @@ def manualattendance():
             if len(manual_attdn)>0:
                 for ma in manual_attdn:
                     a,b=ma.split("_")
-                    if a not in stud_list["name"]:
-                        stud_list["name"].append(a)
-                        stud_list["usn"].append(b)
-                st.subheader("List of Students after Manual Attendance:")
-                st.dataframe(pd.DataFrame(stud_list))
+                    if a not in ma_list["name"]:
+                        ma_list["name"].append(a)
+                        ma_list["usn"].append(b)
+                st.subheader("Selected Students:")
+                st.dataframe(pd.DataFrame(ma_list))
+                st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")    
+                r=st.button("Confirm")
+                if r:
+                    stud_list["name"].append(ma_list["name"])
+                    stud_list["usn"].append(ma_list["usn"])
+                    st.dataframe(pd.DataFrame(ma_list))    
         elif opt=="No":
             st.subheader("Final List of Students:")
             st.dataframe(pd.DataFrame(stud_list))
