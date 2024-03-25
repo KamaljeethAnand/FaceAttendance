@@ -101,8 +101,8 @@ def manualattendance():
                 for a in ma_list["usn"]:
                     if a not in stud_list["usn"]:   
                         stud_list["usn"].append(a)     
-            st.dataframe(pd.DataFrame(stud_list))
-            st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")    
+                st.dataframe(pd.DataFrame(stud_list))
+                st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")    
         # opt = st.radio("Do you want to add more students:", ("Select","Yes", "No"))
         # if opt=="Select":
         #     input()
