@@ -82,35 +82,36 @@ def manualattendance():
         st.dataframe(pd.DataFrame(stud_list))
         st.subheader("Absentee List:")
         st.dataframe(pd.DataFrame(absent_list))    
-        st.write("Since there are "+ str(cnt) + " unknown faces.")
-        opt = st.radio("Do you want to add more students:", ("Select","Yes", "No"))
-        if opt=="Select":
-            input()
-        elif opt == "Yes":
-            st.subheader("Manual Attendance")
-            manual_attdn=st.multiselect("Choose the students to be included:",absent_list["name"])
-            if len(manual_attdn)>0:
-                for ma in manual_attdn:
-                    if ma not in ma_list["name"]:
-                        ma_list["name"].append(ma)
-                        ma_list["usn"].append(absent_list["usn"][absent_list["name"].index(ma)])
-                st.subheader("Selected Students:")
-                st.dataframe(pd.DataFrame(ma_list))   
-                r=st.button("Confirm")
-                if r:
-                    for a in ma_list["name"]:
-                        if a not in stud_list["name"]:   
-                            stud_list["name"].append(a)
-                            # stud_list["usn"].append(ma_list["usn"][ma_list["name"].index(a)])
-                    for a in ma_list["usn"]:
-                        if a not in stud_list["usn"]:   
-                            stud_list["usn"].append(a)    
+        st.write("Since there are "+ str(stud_list["usn"[-1]) + " unknown faces.")
+        st.subheader("Manual Attendance")
+        manual_attdn=st.multiselect("Choose the students to be included:",absent_list["name"])
+        if len(manual_attdn)>0:
+        for ma in manual_attdn:
+                if ma not in ma_list["name"]:
+                ma_list["name"].append(ma)
+                ma_list["usn"].append(absent_list["usn"][absent_list["name"].index(ma)])
+        st.subheader("Selected Students:")
+        st.dataframe(pd.DataFrame(ma_list))   
+        r=st.button("Confirm")
+        if r:
+            for a in ma_list["name"]:
+                if a not in stud_list["name"]:   
+                    stud_list["name"].append(a)
+                    # stud_list["usn"].append(ma_list["usn"][ma_list["name"].index(a)])
+            for a in ma_list["usn"]:
+                if a not in stud_list["usn"]:   
+                    stud_list["usn"].append(a)    
                     
-                    st.dataframe(pd.DataFrame(stud_list))
-                    st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")     
-        elif opt=="No":
-            st.subheader("Final List of Students:")
             st.dataframe(pd.DataFrame(stud_list))
+            st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")    
+        # opt = st.radio("Do you want to add more students:", ("Select","Yes", "No"))
+        # if opt=="Select":
+        #     input()
+        # elif opt == "Yes":
+                 
+        # elif opt=="No":
+        #     st.subheader("Final List of Students:")
+        #     st.dataframe(pd.DataFrame(stud_list))
 def take_attendance():
     with open('encoded_people.pickle', 'rb') as filename:
         people = pickle.load(filename)
