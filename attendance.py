@@ -96,9 +96,9 @@ def manualattendance():
                 r=st.button("Confirm")
                 if r:
                     for a in ma_list["name"]:
-                        if a not in stud_list["name"]:
-                            stud_list["name"].append(ma_list["name"])
-                            stud_list["usn"].append(ma_list["usn"])
+                        if a not in stud_list["name"]:   
+                            stud_list["name"].append(a)
+                            stud_list["usn"].append(ma_list["usn"][ma_list["name"].index(a)])
                     
                     st.dataframe(pd.DataFrame(stud_list))
                     st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")     
