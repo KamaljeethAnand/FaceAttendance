@@ -32,7 +32,10 @@ if 'sl' not in st.session_state:
     st.session_state.sl = stud_list
 
 cnt=0
-absent_list=[]
+absent_list={
+        "name": [],
+        "usn":[]
+}
 if 'al' not in st.session_state:
     st.session_state.al = absent_list
 local_tz = pytz.timezone('Asia/Kolkata')
@@ -85,13 +88,12 @@ def manualattendance():
             input()
         elif opt == "Yes":
             st.subheader("Manual Attendance")
-            manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
+            manual_attdn=st.multiselect("Choose the students to be included:",absent_list["name"])
             if len(manual_attdn)>0:
                 for ma in manual_attdn:
-                    a,b=ma.split("_")
-                    if a not in ma_list["name"]:
-                        ma_list["name"].append(a)
-                        ma_list["usn"].append(b)
+                    if ma not in ma_list["name"]:
+                        ma_list["name"].append(ma)
+                        ma_list["usn"].append(absent_list["usn"][absent_list["name"].index(ma)])
                 st.subheader("Selected Students:")
                 st.dataframe(pd.DataFrame(ma_list))   
                 r=st.button("Confirm")
@@ -99,7 +101,10 @@ def manualattendance():
                     for a in ma_list["name"]:
                         if a not in stud_list["name"]:   
                             stud_list["name"].append(a)
-                            stud_list["usn"].append(ma_list["usn"][ma_list["name"].index(a)])
+                            # stud_list["usn"].append(ma_list["usn"][ma_list["name"].index(a)])
+                    for a in ma_list["usn"]:
+                        if a not in stud_list["usn"]:   
+                            stud_list["usn"].append(a)    
                     
                     st.dataframe(pd.DataFrame(stud_list))
                     st.write("Attendance marked for "+ str(len(stud_list["name"])-1) + ".")     
@@ -129,7 +134,9 @@ def take_attendance():
             st.subheader("Uploaded Image: ")
             st.image(img,channels="RGB")
             for k,v in people.items():
-                absent_list.append(k)    
+                 x,y=k.split("_")   
+                 absent_list["name"].append(x)
+                 absent_list["usn"].append(y)
             option = st.radio("Select Option", ("Select","DeHazing", "No Dehazing"))
             if option == "Select":
                 input()
@@ -174,8 +181,6 @@ def take_attendance():
                         if a not in stud_list["name"]:
                             stud_list["name"].append(a)
                             stud_list["usn"].append(b)
-                        elif best_match_name in absent_list:
-                            absent_list.remove(best_match_name)
                     else:
                         cnt=cnt+1
                 # Draw and write on photo
@@ -188,6 +193,10 @@ def take_attendance():
                 final_images.append(face_img)
             st.write("""Face Detection and Tagging completed!!""")
             st.image(final_images)
+            for a in stud_list["name"]:
+                if a in absent_list["name"]:   
+                        absent_list["usn"].remove(absent_list["usn"][absent_list["name"].index(a)])
+                        absent_list["name"].remove(a)
             stud_list["name"].append("Unknown Faces")
             stud_list["usn"].append(cnt)
             st.subheader("Students detected from Uploaded Images are:")
