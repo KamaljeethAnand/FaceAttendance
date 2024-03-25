@@ -66,7 +66,7 @@ import dlib
 #     st.session_state.clkd=False
 # def callback():
 #     st.session_state.clkd=True
-def manualattendance(lis):
+def manualattendance():
     stud_list=st.session_state.sl
     absent_list=st.session_state.al
     if len(stud_list)>0:
