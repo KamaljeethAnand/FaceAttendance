@@ -58,8 +58,7 @@ def main():
 
             """
         )
-        st.write("Check [Google Sheets](%s)  for updated list!!!" % url)
-        st.markdown("Check [Google Sheets](%s)  for updated list!!!" % url)     
+        st.write("Check [Google Sheets](%s) for updated attendance list!!!" % url)
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M"))) 
     if choice == "Take Attendance":
         take_attendance()
