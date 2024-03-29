@@ -23,9 +23,10 @@ logo = Image.open("cmr.png")
 
 # Display the logo and navigation bar
 st.image(logo, width=150)
-
-# https://docs.google.com/spreadsheets/d/1lUzHTg-J13V0jxMqcd0_15WbQ7o8zSXFWi-Z03aKzng/ - EXCEL SHEET
+#GOOGLE SHEETS
+url = "https://docs.google.com/spreadsheets/d/1lUzHTg-J13V0jxMqcd0_15WbQ7o8zSXFWi-Z03aKzng/"
 conn = st.connection("gsheets", type=GSheetsConnection)
+
 stud_list = {
         "name": [],
         "usn":[]
@@ -57,6 +58,8 @@ def main():
 
             """
         )
+        st.write("Check [Google Sheets](%s)  for updated list!!!" % url)
+        st.markdown("Check [Google Sheets](%s)  for updated list!!!" % url)     
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M"))) 
     if choice == "Take Attendance":
         take_attendance()
@@ -106,7 +109,7 @@ def manualattendance():
                     if a not in stud_list["usn"]:   
                         stud_list["usn"].append(a)     
                 st.dataframe(pd.DataFrame(stud_list))
-                st.write("Attendance marked for "+ str(len(stud_list["name"])) + ".Check Google Sheets for updated list!!!")
+                st.write("Attendance marked for "+ str(len(stud_list["name"])) + ".Check [Google Sheets](%s)  for updated list!!!" % url)
                 conn.create(worksheet=str(now.strftime("%a|%d/%b/%Y|%H:%M")),data=pd.DataFrame(stud_list))
                 stud_list["name"]=[]
                 stud_list["usn"]=[]    
