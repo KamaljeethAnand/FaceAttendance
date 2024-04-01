@@ -68,6 +68,7 @@ def main():
         df = conn.read(worksheet="REPORT CONSOLIDATED")  
         df2 = conn.read(worksheet="Mon|01/Apr/2024|15:23")
         st.write(df)
+            
         st.write(df2)    
                 # Check if each name in df exists in df2
         df[shname] = df['Name'].isin(df2['name'])
