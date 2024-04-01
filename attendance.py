@@ -63,9 +63,8 @@ def main():
         df = conn.read(worksheet="REPORT CONSOLIDATED")
         df=pd.DataFrame(df)    
         st.write(df["Name"])   
-        df2=conn.read(worksheet="Mon|25/Mar/2024|21:06")
-        st.write(df2.info())    
-        df["Mon|25/Mar/2024|21:06"] = np.where(df["USN"]==df2["usn"],"P","F")
+        df2=conn.read(worksheet="Mon|25/Mar/2024|21:06")   
+        df["Mon|25/Mar/2024|21:06"] = np.where(df["Name"]==df2["name"],"P","F")
         st.write(pd.DataFrame(df))
         conn.update(worksheet="REPORT CONSOLIDATED",data=df)
     if choice == "Take Attendance":
