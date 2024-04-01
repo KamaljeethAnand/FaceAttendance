@@ -128,6 +128,7 @@ def manualattendance():
                 df=df.iloc[:len(df["Name"])]
                 # Drop extra unnamed columns if any
                 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+                df.reset_index(drop=True, inplace=True)    
                 # Display the dataframe
                 st.write(pd.DataFrame(df))
 
