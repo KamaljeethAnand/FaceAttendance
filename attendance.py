@@ -112,7 +112,6 @@ def manualattendance():
                 st.dataframe(pd.DataFrame(stud_list))
                 st.write("Attendance marked for "+ str(len(stud_list["name"])) + ".Check [Google Sheets](%s)  for updated list!!!" % url)
                 # Assuming now is defined somewhere in your code
-                now = datetime.now()
                 shname = str(now.strftime("%a|%d/%b/%Y|%H:%M"))    
 
                 # Assuming conn is your connection object to Google Sheets
