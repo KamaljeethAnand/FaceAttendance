@@ -78,18 +78,12 @@ def main():
             if a in df2["name"].values:
                 fnd.append("P")
             else:
-                 fnd.append("A")   
-        #df[shname] = df['Name'].isin(df2['name'])
-                # Replace True with 'P' and False with 'A'
-        # df[shname] =  df[shname].map({True: 'P', False: 'A'})  
-                # df=df.iloc[:len(df["Name"])]
-                # Drop extra unnamed columns if any
-        # df = df.loc[:, ~df.columns.str.contains('^Unnamed')]    
-                # Display the dataframe
+                 fnd.append("A")
+        df[shname]=fnd            
         st.write(pd.DataFrame(df))
 
-                # Update the Google Sheets
-        # conn.update(worksheet="REPORT CONSOLIDATED", data=df)    
+        # Update the Google Sheets
+        conn.update(worksheet="REPORT CONSOLIDATED", data=df)    
         
     if choice == "Take Attendance":
         take_attendance()
