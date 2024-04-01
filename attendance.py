@@ -73,12 +73,12 @@ def main():
         st.write(df2.info())    
         st.write(df2)    
                 # Check if each name in df exists in df2
-        df[shname]=[]
+        fnd=[]
         for a in df["Name"]:
-            if a in df2["name"]:
-                df[shname].append("P")
+            if a in df2["name"].values:
+                fnd.append("P")
             else:
-                 df[shname].append("A")   
+                 fnd.append("A")   
         #df[shname] = df['Name'].isin(df2['name'])
                 # Replace True with 'P' and False with 'A'
         # df[shname] =  df[shname].map({True: 'P', False: 'A'})  
