@@ -25,7 +25,7 @@ logo = Image.open("cmr.png")
 st.image(logo, width=150)
 #GOOGLE SHEETS
 url = "https://docs.google.com/spreadsheets/d/1lUzHTg-J13V0jxMqcd0_15WbQ7o8zSXFWi-Z03aKzng/"
-conn = st.connection("gsheets", type=GSheetsConnection)
+conn = st.connection("gsheets", type=GSheetsConnection,ttl=1)
 
 stud_list = {
         "name": [],
@@ -59,8 +59,7 @@ def main():
             """
         )
             
-        st.write("Check [Google Sheets](%s) for updated attendance list!!!" % url)
-        conn = st.connection("gsheets", type=GSheetsConnection)    
+        st.write("Check [Google Sheets](%s) for updated attendance list!!!" % url)    
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
         shname = str(now.strftime("%a|%d/%b/%Y|%H:%M"))    
                 # Assuming conn is your connection object to Google Sheets
