@@ -62,9 +62,9 @@ def main():
         st.write("Check [Google Sheets](%s) for updated attendance list!!!" % url)
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
         df = pd.DataFrame(conn.read(worksheet="REPORT CONSOLIDATED"))  
-        df2=pd.DataFrame(conn.read(worksheet="Mon|25/Mar/2024|21:06"))   
-        df["Mon|25/Mar/2024|21:06"] = df['Name'].isin(df2['name'])
-        df["Mon|25/Mar/2024|21:06"] = df["Mon|25/Mar/2024|21:06"].map({True: 'P', False: 'A'})    
+        df2=pd.DataFrame(conn.read(worksheet="Tue|26/Mar/2024|23:52"))   
+        df["Tue|26/Mar/2024|23:52"] = df['Name'].isin(df2['name'])
+        df["Tue|26/Mar/2024|23:52"] = df["Tue|26/Mar/2024|23:52"].map({True: 'P', False: 'A'})    
         st.write(pd.DataFrame(df))
         conn.update(worksheet="REPORT CONSOLIDATED",data=df)
     if choice == "Take Attendance":
