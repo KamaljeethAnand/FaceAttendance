@@ -65,7 +65,7 @@ def main():
                 # Assuming conn is your connection object to Google Sheets
                 # Assuming stud_list is your student list data
         # conn.create(worksheet=shname, data=pd.DataFrame(stud_list))
-        df = conn.read(worksheet="REPORT CONSOLIDATED",usecols=[1,2,3,4])  
+        df = conn.read(worksheet="REPORT CONSOLIDATED",usecols=[0,1,2,3,4])  
         df2 = conn.read(worksheet="Mon|01/Apr/2024|15:23")
         st.write(df)
             
