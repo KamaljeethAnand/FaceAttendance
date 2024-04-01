@@ -73,15 +73,8 @@ def main():
         st.write(df2.info())    
         st.write(df2)    
                 # Check if each name in df exists in df2
-        fnd=[]
-        for a in df["Name"]:
-            if a in df2["name"].values:
-                fnd.append("P")
-            else:
-                 fnd.append("A")
-        df[shname]=fnd            
+        df[shname] = df['Name'].isin(df2['name'])      
         st.write(pd.DataFrame(df))
-
         # Update the Google Sheets
         conn.update(worksheet="REPORT CONSOLIDATED", data=df)    
         
