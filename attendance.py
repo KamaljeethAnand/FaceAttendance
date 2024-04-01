@@ -64,7 +64,8 @@ def main():
         df=pd.DataFrame(df)    
         st.write(df["Name"])   
         df2=conn.read(worksheet="Mon|25/Mar/2024|21:06")   
-        df["Mon|25/Mar/2024|21:06"] = np.where(df["Name"]==df2["name"],"P","F")
+        df["Mon|25/Mar/2024|21:06"] = df['Name'].isin(df2['name'])
+        df["Mon|25/Mar/2024|21:06"] = df["Mon|25/Mar/2024|21:06"].map({True: 'P', False: 'A'})    
         st.write(pd.DataFrame(df))
         conn.update(worksheet="REPORT CONSOLIDATED",data=df)
     if choice == "Take Attendance":
