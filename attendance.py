@@ -25,7 +25,7 @@ logo = Image.open("cmr.png")
 st.image(logo, width=150)
 #GOOGLE SHEETS
 url = "https://docs.google.com/spreadsheets/d/1lUzHTg-J13V0jxMqcd0_15WbQ7o8zSXFWi-Z03aKzng/"
-conn = st.connection("gsheets", type=GSheetsConnection,ttl=1)
+conn = st.connection("gsheets", type=GSheetsConnection)
 
 stud_list = {
         "name": [],
@@ -65,7 +65,7 @@ def main():
                 # Assuming conn is your connection object to Google Sheets
                 # Assuming stud_list is your student list data
         # conn.create(worksheet=shname, data=pd.DataFrame(stud_list))
-        df = conn.read(worksheet="REPORT CONSOLIDATED")  
+        df = conn.read(worksheet="REPORT CONSOLIDATED",usecols=[1,2,3,4])  
         df2 = conn.read(worksheet="Mon|01/Apr/2024|15:23")
         st.write(df)
             
