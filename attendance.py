@@ -73,9 +73,15 @@ def main():
         st.write(df2.info())    
         st.write(df2)    
                 # Check if each name in df exists in df2
-        df[shname] = df['Name'].isin(df2['name'])
+        df[shname]=[]
+        for a in df["Name"]:
+            if a in df2["name"]:
+                df[shname].append("P")
+            else:
+                 df[shname].append("A")   
+        #df[shname] = df['Name'].isin(df2['name'])
                 # Replace True with 'P' and False with 'A'
-        df[shname] =  df[shname].map({True: 'P', False: 'A'})  
+        # df[shname] =  df[shname].map({True: 'P', False: 'A'})  
                 # df=df.iloc[:len(df["Name"])]
                 # Drop extra unnamed columns if any
         # df = df.loc[:, ~df.columns.str.contains('^Unnamed')]    
