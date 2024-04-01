@@ -58,6 +58,7 @@ def main():
 
             """
         )
+            
         st.write("Check [Google Sheets](%s) for updated attendance list!!!" % url)
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
         df = conn.read(worksheet="REPORT CONSOLIDATED")
