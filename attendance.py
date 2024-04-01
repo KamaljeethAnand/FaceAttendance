@@ -72,7 +72,7 @@ def main():
             
         st.write(df2)    
                 # Check if each name in df exists in df2
-        df[shname] = df['USN'].isin(df2['usn'])
+        df[shname] = df['usn'].isin(df2['usn'])
                 # Replace True with 'P' and False with 'A'
         df[shname] =  df[shname].map({True: 'P', False: 'A'})  
                 # df=df.iloc[:len(df["Name"])]
