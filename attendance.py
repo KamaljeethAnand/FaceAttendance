@@ -66,8 +66,9 @@ def main():
                 # Assuming stud_list is your student list data
         # conn.create(worksheet=shname, data=pd.DataFrame(stud_list))
         df = conn.read(worksheet="REPORT CONSOLIDATED")  
-        df2 = conn.read(worksheet="Mon|01/Apr/2024|15:23")  
-        df=df.iloc[:len(df["Name"])]
+        df2 = conn.read(worksheet="Mon|01/Apr/2024|15:23")
+        st.write(df)
+        st.write(df2)    
                 # Check if each name in df exists in df2
         df[shname] = df['Name'].isin(df2['name'])
         df=df.iloc[:len(df["Name"])]
