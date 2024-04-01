@@ -71,11 +71,11 @@ def main():
         st.write(df)
         st.write(df2)    
                 # Check if each name in df exists in df2
-        # df[shname] = df['Name'].isin(df2['name'])
-        # df[shname] = df[shname].map({True: 'P', False: 'A'})     
-        # st.write(pd.DataFrame(df))
+        df[shname] = df['Name'].isin(df2['name'])
+        df[shname] = df[shname].map({True: 'P', False: 'A'})     
+        st.write(pd.DataFrame(df))
         # Update the Google Sheets
-        # conn.update(worksheet="REPORT CONSOLIDATED", data=df)    
+        conn.update(worksheet="REPORT CONSOLIDATED", data=df)    
         
     if choice == "Take Attendance":
         take_attendance()
