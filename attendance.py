@@ -61,6 +61,26 @@ def main():
             
         st.write("Check [Google Sheets](%s) for updated attendance list!!!" % url)
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
+        shname = str(now.strftime("%a|%d/%b/%Y|%H:%M"))    
+                # Assuming conn is your connection object to Google Sheets
+                # Assuming stud_list is your student list data
+        # conn.create(worksheet=shname, data=pd.DataFrame(stud_list))
+        df = conn.read(worksheet="REPORT CONSOLIDATED")  
+        df2 = conn.read(worksheet="Mon|01/Apr/2024|15:23")  
+        df=df.iloc[:len(df["Name"])]
+                # Check if each name in df exists in df2
+        df[shname] = df['Name'].isin(df2['name'])
+        df=df.iloc[:len(df["Name"])]
+                # Replace True with 'P' and False with 'A'
+                # df[shname] =  df[shname].map({True: 'P', False: 'A'})  
+                # df=df.iloc[:len(df["Name"])]
+                # Drop extra unnamed columns if any
+        df = df.loc[:, ~df.columns.str.contains('^Unnamed')]    
+                # Display the dataframe
+        st.write(pd.DataFrame(df))
+
+                # Update the Google Sheets
+        conn.update(worksheet="REPORT CONSOLIDATED", data=df)    
         
     if choice == "Take Attendance":
         take_attendance()
