@@ -59,7 +59,13 @@ def main():
             """
         )
         st.write("Check [Google Sheets](%s) for updated attendance list!!!" % url)
-        st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M"))) 
+        st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
+        df = conn.read()
+        df2=conn.read(worksheet="Mon|25/Mar/2024|21:06")
+        df["Mon|25/Mar/2024|21:06"] = np.where(df["USN"]==df2["usn"],"P","F")
+        st.write(pd.DataFrame(df))
+        conn.update(worksheet="REPORT CONSOLIDATED",data=df)
+
     if choice == "Take Attendance":
         take_attendance()
     if choice == "Manual Attendance":
@@ -110,6 +116,7 @@ def manualattendance():
                 st.dataframe(pd.DataFrame(stud_list))
                 st.write("Attendance marked for "+ str(len(stud_list["name"])) + ".Check [Google Sheets](%s)  for updated list!!!" % url)
                 conn.create(worksheet=str(now.strftime("%a|%d/%b/%Y|%H:%M")),data=pd.DataFrame(stud_list))
+
                 stud_list["name"]=[]
                 stud_list["usn"]=[]    
 def take_attendance():
