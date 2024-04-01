@@ -60,13 +60,14 @@ def main():
         )
             
         st.write("Check [Google Sheets](%s) for updated attendance list!!!" % url)
+        conn = st.connection("gsheets", type=GSheetsConnection)    
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
         shname = str(now.strftime("%a|%d/%b/%Y|%H:%M"))    
                 # Assuming conn is your connection object to Google Sheets
                 # Assuming stud_list is your student list data
         # conn.create(worksheet=shname, data=pd.DataFrame(stud_list))
         df = conn.read(worksheet="REPORT CONSOLIDATED")  
-        df2 = conn.read(worksheet="Mon|01/Apr/2024|15:23",usecols=[0, 1])
+        df2 = conn.read(worksheet="Mon|01/Apr/2024|15:23")
         st.write(df)
             
         st.write(df2)    
