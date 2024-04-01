@@ -72,17 +72,16 @@ def main():
             
         st.write(df2)    
                 # Check if each name in df exists in df2
-        # df[shname] = df['Name'].isin(df2['name'])
-        # df=df.iloc[:len(df["Name"])]
-        #         # Replace True with 'P' and False with 'A'
-        #         # df[shname] =  df[shname].map({True: 'P', False: 'A'})  
-        #         # df=df.iloc[:len(df["Name"])]
-        #         # Drop extra unnamed columns if any
+        df[shname] = df['Name'].isin(df2['name'])
+                # Replace True with 'P' and False with 'A'
+        df[shname] =  df[shname].map({True: 'P', False: 'A'})  
+                # df=df.iloc[:len(df["Name"])]
+                # Drop extra unnamed columns if any
         # df = df.loc[:, ~df.columns.str.contains('^Unnamed')]    
-        #         # Display the dataframe
-        # st.write(pd.DataFrame(df))
+                # Display the dataframe
+        st.write(pd.DataFrame(df))
 
-        #         # Update the Google Sheets
+                # Update the Google Sheets
         # conn.update(worksheet="REPORT CONSOLIDATED", data=df)    
         
     if choice == "Take Attendance":
