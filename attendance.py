@@ -119,7 +119,7 @@ def manualattendance():
                 conn.create(worksheet=shname, data=pd.DataFrame(stud_list))
                 df = pd.DataFrame(conn.read(worksheet="REPORT CONSOLIDATED"))  
                 df2 = pd.DataFrame(conn.read(worksheet=shname))   
-
+                df=df.iloc[:len(df["Name"])]
                 # Check if each name in df exists in df2
                 found_names = df['Name'].isin(df2['name'])
 
