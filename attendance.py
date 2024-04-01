@@ -65,15 +65,13 @@ def main():
                 # Assuming conn is your connection object to Google Sheets
                 # Assuming stud_list is your student list data
         # conn.create(worksheet=shname, data=pd.DataFrame(stud_list))
-        df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",usecols=[0,1,2,3,4])
+        df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",usecols=[0,1,2,3,4,5,6,7,8,9,10])
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]    
         df2 = conn.read(spreadsheet=url,worksheet="Mon|01/Apr/2024|15:23")
         st.write(df)
-        st.write(df.info())
-        st.write(df2.info())    
         st.write(df2)    
                 # Check if each name in df exists in df2
-        df[shname] = df['Name'].isin(df2['name'])      
+        df[shname] = df['Name'].isin(df2['name'])     
         st.write(pd.DataFrame(df))
         # Update the Google Sheets
         conn.update(worksheet="REPORT CONSOLIDATED", data=df)    
