@@ -121,7 +121,7 @@ def manualattendance():
                 df2 = pd.DataFrame(conn.read(worksheet=shname))   
                 df=df.iloc[:len(df["Name"])]
                 # Check if each name in df exists in df2
-                df[shname] = df['Name'].isin(df2['name'])
+                df[shname] = df2['name'].isin(df['Name'])
                 df=df.iloc[:len(df["Name"])]
                 # Replace True with 'P' and False with 'A'
                 df[shname] =  df[shname].map({True: 'P', False: 'A'})  
