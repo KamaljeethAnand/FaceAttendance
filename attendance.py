@@ -117,8 +117,8 @@ def manualattendance():
                 # Assuming conn is your connection object to Google Sheets
                 # Assuming stud_list is your student list data
                 conn.create(worksheet=shname, data=pd.DataFrame(stud_list))
-                df = pd.DataFrame(conn.read(worksheet="REPORT CONSOLIDATED"))  
-                df2 = pd.DataFrame(conn.read(worksheet=shname))   
+                df = conn.read(worksheet="REPORT CONSOLIDATED")  
+                df2 = conn.read(worksheet=shname)   
                 df=df.iloc[:len(df["Name"])]
                 # Check if each name in df exists in df2
                 df[shname] = df2['name'].isin(df['Name'])
