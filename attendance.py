@@ -121,14 +121,13 @@ def manualattendance():
                 df2 = pd.DataFrame(conn.read(worksheet=shname))   
                 df=df.iloc[:len(df["Name"])]
                 # Check if each name in df exists in df2
-                found_names = df['Name'].isin(df2['name'])
-
+                df[shname] = df['Name'].isin(df2['name'])
+                df=df.iloc[:len(df["Name"])]
                 # Replace True with 'P' and False with 'A'
-                df[shname] = found_names.map({True: 'P', False: 'A'})  
-
+                df[shname] =  df[shname].map({True: 'P', False: 'A'})  
+                df=df.iloc[:len(df["Name"])]
                 # Drop extra unnamed columns if any
                 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-
                 # Display the dataframe
                 st.write(pd.DataFrame(df))
 
