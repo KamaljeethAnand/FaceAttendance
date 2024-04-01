@@ -69,7 +69,8 @@ def main():
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]    
         df2 = conn.read(spreadsheet=url,worksheet="Mon|01/Apr/2024|15:23")
         st.write(df)
-            
+        print(df.info())
+        print(df2.info())    
         st.write(df2)    
                 # Check if each name in df exists in df2
         df[shname] = df['Name'].isin(df2['name'])
