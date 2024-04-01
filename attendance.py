@@ -62,7 +62,7 @@ def main():
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
         df = conn.read(worksheet="REPORT CONSOLIDATED")
         df=pd.DataFrame(df)
-        st.write(df["Name"])    
+        st.write(df["USN"])    
         df2=conn.read(worksheet="Mon|25/Mar/2024|21:06")
         df["Mon|25/Mar/2024|21:06"] = np.where(df["USN"]==df2["usn"],"P","F")
         st.write(pd.DataFrame(df))
