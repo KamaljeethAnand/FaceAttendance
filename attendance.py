@@ -61,21 +61,9 @@ def main():
             
         st.write("Check [Google Sheets](%s) for updated attendance list!!!" % url)    
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
-        shname = str(now.strftime("%a|%d/%b/%Y|%H:%M"))    
-                # Assuming conn is your connection object to Google Sheets
-                # Assuming stud_list is your student list data
-        # conn.create(worksheet=shname, data=pd.DataFrame(stud_list))
         df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED")
-        df = df.loc[:, ~df.columns.str.contains('^Unnamed')]    
-        df2 = conn.read(spreadsheet=url,worksheet="Mon|01/Apr/2024|15:23")
-        st.write(df)
-        st.write(df2)    
-                # Check if each name in df exists in df2
-        df[shname] = df['Name'].isin(df2['name'])
-        df[shname] = df[shname].map({True: 'P', False: 'A'})     
-        st.write(pd.DataFrame(df))
-        # Update the Google Sheets
-        conn.update(worksheet="REPORT CONSOLIDATED", data=df)    
+        df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+        st.write(df)    
         
     if choice == "Take Attendance":
         take_attendance()
@@ -125,38 +113,23 @@ def manualattendance():
                     if a not in stud_list["usn"]:   
                         stud_list["usn"].append(a)     
                 st.dataframe(pd.DataFrame(stud_list))
-                st.write("Attendance marked for "+ str(len(stud_list["name"])) + ".Check [Google Sheets](%s)  for updated list!!!" % url)
-                # Assuming now is defined somewhere in your code
-                shname = str(now.strftime("%a|%d/%b/%Y|%H:%M"))    
-
-                # Assuming conn is your connection object to Google Sheets
-                # Assuming stud_list is your student list data
+ 
+                # shname = str(now.strftime("%a|%d/%b/%Y|%H:%M"))       
+                shname = st.session_state.shname
                 conn.create(worksheet=shname, data=pd.DataFrame(stud_list))
-                df = conn.read(worksheet="REPORT CONSOLIDATED")  
-                df2 = conn.read(worksheet=shname)  
-                df=df.iloc[:len(df["Name"])]
+                df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED")
+                df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+                conn2 = st.connection("gsheets", type=GSheetsConnection,ttl=1)    
+                df2 = conn2.read(spreadsheet=url,worksheet=shname)  
                 # Check if each name in df exists in df2
                 df[shname] = df['Name'].isin(df2['name'])
-                df=df.iloc[:len(df["Name"])]
-                # Replace True with 'P' and False with 'A'
-                # df[shname] =  df[shname].map({True: 'P', False: 'A'})  
-                # df=df.iloc[:len(df["Name"])]
-                # Drop extra unnamed columns if any
-                df = df.loc[:, ~df.columns.str.contains('^Unnamed')]    
-                # Display the dataframe
+                df[shname] = df[shname].map({True: 'P', False: 'A'})
+                st.subheader("CONSOLIDATED REPORT")     
                 st.write(pd.DataFrame(df))
-
                 # Update the Google Sheets
                 conn.update(worksheet="REPORT CONSOLIDATED", data=df)
-                        
-                # shname=str(now.strftime("%a|%d/%b/%Y|%H:%M"))    
-                # conn.create(worksheet=shname,data=pd.DataFrame(stud_list))
-                # df = pd.DataFrame(conn.read(worksheet="REPORT CONSOLIDATED"))  
-                # df2=pd.DataFrame(conn.read(worksheet=shname))   
-                # df[shname] = df['Name'].isin(df2['name'])
-                # df[shname] = df[shname].map({True: 'P', False: 'A'})    
-                # st.write(pd.DataFrame(df))
-                # conn.update(worksheet="REPORT CONSOLIDATED",data=df)
+                st.write("Attendance marked for "+ str(len(stud_list["name"])) + ".Check the updated [Google Sheets](%s)!!!" % url)
+
                 stud_list["name"]=[]
                 stud_list["usn"]=[]    
 def take_attendance():
@@ -166,6 +139,7 @@ def take_attendance():
     semester = st.selectbox("Select Class", options=[1, 2, 3, 4, 5, 6, 7, 8])
     section = st.selectbox("Select Section", options=["A", "B", "C", "D"])
     department = st.selectbox("Select department", options = ["CSE", "ISE", "ECE", "EEE", "AI&ML", "DS", "Mech", "Civil"])
+    shname= str(semester) + "|"+str(section) + "|"+str(department)
     option = st.radio("Select Option", ("Select","Upload Image"))
     if option == "Upload Image":
         # Read in the uploaded image
@@ -255,6 +229,7 @@ def take_attendance():
             st.write("Go to Manual Attendance tab for adding more students!!!")  
             st.session_state.sl = stud_list
             st.session_state.al = absent_list
+            st.session_state.shname =shname
             # with st.form("manattdn"):
             #     manattdn=st.form_submit_button("Manual Attendance")
             # if manattdn:
