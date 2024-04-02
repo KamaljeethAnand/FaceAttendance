@@ -117,7 +117,7 @@ def manualattendance():
                 # shname = str(now.strftime("%a|%d/%b/%Y|%H:%M"))       
                 shname = st.session_state.shname
                 conn.create(worksheet=shname, data=pd.DataFrame(stud_list))
-                df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED")
+                df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",ttl=30)
                 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
                 conn2 = st.connection("gsheets", type=GSheetsConnection,ttl=1)    
                 df2 = conn2.read(spreadsheet=url,worksheet=shname)  
