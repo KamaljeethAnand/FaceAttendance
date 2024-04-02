@@ -124,6 +124,10 @@ def manualattendance():
                 # Check if each name in df exists in df2
                 df[shname] = df['Name'].isin(df2['name'])
                 df[shname] = df[shname].map({True: 'P', False: 'A'})
+                totalp = sum(1 for v in df[shname] if v=="P")
+                percentp=(totalp * 100 / (len(df["Name"].values)-2))    
+                df[shname].append(totalp)
+                df[shname].append(percentp)     
                 st.subheader("CONSOLIDATED REPORT")     
                 st.write(pd.DataFrame(df))
                 # Update the Google Sheets
