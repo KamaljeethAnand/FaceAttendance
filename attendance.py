@@ -61,7 +61,7 @@ def main():
             
         st.write("Check [Google Sheets](%s) for updated attendance list!!!" % url)    
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
-        df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED")
+        df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",ttl=10)
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
         st.write(df)    
         
