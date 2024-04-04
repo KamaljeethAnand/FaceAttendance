@@ -144,13 +144,16 @@ def take_attendance():
     section = st.selectbox("Select Section", options=["A", "B", "C", "D"])
     department = st.selectbox("Select department", options = ["CSE", "ISE", "ECE", "EEE", "AI&ML", "DS", "Mech", "Civil"])
     shname= str(semester) + "|"+str(section) + "|"+str(department)
-    option = st.radio("Select Option", ("Select","Upload Image"))
+    option = st.radio("Select Option", ("Upload Image","Take Live Image"))
     if option == "Upload Image":
         # Read in the uploaded image
         uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"],accept_multiple_files=True)
+    elif option == "Take Live Image":
+         # Read in the live image from camera
+        uploaded_file = st.camera_input("Choose an image file")
         img=[]
         img_np=[]
-        if uploaded_file is not None and len(uploaded_file) !=0:
+    if uploaded_file is not None and len(uploaded_file) !=0:
             for i in uploaded_file:
                 file_bytes = i.getvalue()
                 nparr = np.frombuffer(file_bytes, np.uint8)
