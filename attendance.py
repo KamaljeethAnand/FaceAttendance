@@ -191,7 +191,7 @@ def take_attendance():
             #Face Detection
             cnt=0    
             for x in dehaze_imgnp:
-                img_loc = face_recognition.face_locations(x,number_of_times_to_upsample=2,model="hog")
+                img_loc = face_recognition.face_locations(x,number_of_times_to_upsample=3,model="hog")
                 img_enc = face_recognition.face_encodings(x,known_face_locations=img_loc)
                 face_img = PIL.Image.fromarray(x)
             #Face Tagging
@@ -201,7 +201,7 @@ def take_attendance():
                     best_match_count = 0
                     best_match_name = "unknown"
                     for k,v in people.items():
-                        result = face_recognition.compare_faces(v,img_enc[i],tolerance=0.45)
+                        result = face_recognition.compare_faces(v,img_enc[i],tolerance=0.46)
                         count_true = result.count(True)
                         if  count_true > best_match_count: # To find the best person that matches with the face
                             best_match_count = count_true
