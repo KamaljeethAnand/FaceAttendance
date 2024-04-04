@@ -127,7 +127,10 @@ def manualattendance():
                 totalp = sum(1 for v in df[shname] if v=="P")
                 percentp=(totalp * 100 / (len(df["Name"].values)-2))    
                 # df[shname].append(str(totalp))
-                # df[shname].append(str(percentp))     
+                # df[shname].append(str(percentp))
+                last_two_rows = df[shname].tail(2)
+                # Replace the last two rows with totalp and percentp
+                last_two_rows = last_two_rows.replace(['A', 'P'], [totalp, percentp])    
                 st.subheader("CONSOLIDATED REPORT")
                 st.write("Total Students Present: "+ str(totalp))
                 st.write("% Students Present: "+ str(percentp) + "%") 
