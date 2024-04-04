@@ -126,8 +126,8 @@ def manualattendance():
                 df[shname] = df[shname].map({True: 'P', False: 'A'})
                 totalp = sum(1 for v in df[shname] if v=="P")
                 percentp=(totalp * 100 / (len(df["Name"].values)-2))    
-                df[shname].append(totalp)
-                df[shname].append(percentp)     
+                df[shname].append(str(totalp))
+                df[shname].append(str(percentp))     
                 st.subheader("CONSOLIDATED REPORT")     
                 st.write(pd.DataFrame(df))
                 # Update the Google Sheets
