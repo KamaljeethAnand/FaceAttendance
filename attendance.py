@@ -88,9 +88,9 @@ def manualattendance():
     }   
     if len(stud_list["name"])>0:
         st.subheader("Students detected are:")
-        st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list)+1)))
+        st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list["name"])+1)))
         st.subheader("Absentee List:")
-        st.dataframe(pd.DataFrame(absent_list,index=range(1, len(absent_list)+1)))    
+        st.dataframe(pd.DataFrame(absent_list,index=range(1, len(absent_list["name"])+1)))    
         st.write("Since there are "+ str(stud_list["usn"][-1]) + " unknown faces.")
         st.subheader("Manual Attendance")
         manual_attdn=st.multiselect("Choose the students to be included:",absent_list["name"])
@@ -112,11 +112,11 @@ def manualattendance():
                 for a in ma_list["usn"]:
                     if a not in stud_list["usn"]:   
                         stud_list["usn"].append(a)     
-                st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list)+1)))
+                st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list["name"])+1)))
  
                 # shname = str(now.strftime("%a|%d/%b/%Y|%H:%M"))       
                 shname = st.session_state.shname
-                conn.create(worksheet=shname, data=pd.DataFrame(stud_list,index=range(1, len(stud_list)+1)))
+                conn.create(worksheet=shname, data=pd.DataFrame(stud_list,index=range(1, len(stud_list["name"])+1)))
                 df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",ttl=30)
                 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
                 conn2 = st.connection("gsheets", type=GSheetsConnection,ttl=1)    
@@ -235,9 +235,9 @@ def take_attendance():
             stud_list["name"].append("Unknown Faces")
             stud_list["usn"].append(cnt)
             st.subheader("Students detected from Uploaded Images are:")
-            st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list))))
+            st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list["name"]))))
             st.subheader("Absentees:")
-            st.dataframe(pd.DataFrame(absent_list,index=range(1, len(absent_list))))    
+            st.dataframe(pd.DataFrame(absent_list,index=range(1, len(absent_list["name"]))))    
             st.write("Since there are "+ str(cnt) + " unknown faces. It is suggested the professor must take Manual Attendance also")
             st.write("Go to Manual Attendance tab for adding more students!!!")  
             st.session_state.sl = stud_list
