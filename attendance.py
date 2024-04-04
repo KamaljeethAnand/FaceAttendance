@@ -34,7 +34,7 @@ stud_list = {
 if 'sl' not in st.session_state:
     st.session_state.sl = stud_list
 
-cnt=0
+cnt=-1
 absent_list={
         "name": [],
         "usn":[]
@@ -194,7 +194,7 @@ def take_attendance():
                 st.image(dehaze_img,channels="RGB")
             st.write("""Face Detection and Tagging in progress....""")
             #Face Detection
-            cnt=0    
+            cnt=-1    
             for x in dehaze_imgnp:
                 img_loc = face_recognition.face_locations(x,number_of_times_to_upsample=3,model="hog")
                 img_enc = face_recognition.face_encodings(x,known_face_locations=img_loc,num_jitters=1)
