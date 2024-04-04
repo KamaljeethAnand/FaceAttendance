@@ -63,7 +63,7 @@ def main():
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
         df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",ttl=10)
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-        st.write(pd.DataFrame(df,index=range(1, len(df["Name"])+1)))    
+        st.write(pd.DataFrame(df,index=range(1, len(df["Name"]))))    
         
     if choice == "Take Attendance":
         take_attendance()
