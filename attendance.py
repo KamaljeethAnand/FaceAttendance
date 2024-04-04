@@ -125,7 +125,7 @@ def manualattendance():
                 df[shname] = df['Name'].isin(df2['name'])
                 df[shname] = df[shname].map({True: 'P', False: 'A'})
                 totalp = sum(1 for v in df[shname] if v=="P")
-                percentp=(totalp * 100 / (len(df["Name"].values)-2))    
+                percentp=(totalp * 100 / (len(df["Name"].values)-1))    
                 # df[shname].append(str(totalp))
                 # df[shname].append(str(percentp))
                 last_two_rows = df[shname].tail(2)
