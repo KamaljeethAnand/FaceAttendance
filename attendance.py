@@ -128,9 +128,9 @@ def manualattendance():
                 percentp=(totalp * 100 / (len(df["Name"].values)-1))    
                 # df[shname].append(str(totalp))
                 # df[shname].append(str(percentp))
-                last_two_rows = df[shname].tail(2)
+                # last_two_rows = df[shname].tail(2)
                 # Replace the last two rows with totalp and percentp
-                last_two_rows = last_two_rows.replace(['A', 'P'], [totalp, percentp])    
+                # last_two_rows = last_two_rows.replace(['A', 'P'], [totalp, percentp])    
                 st.subheader("CONSOLIDATED REPORT")
                 st.write("Total Students Present: "+ str(totalp))
                 st.write("% Students Present: "+ str(percentp) + "%") 
@@ -197,7 +197,7 @@ def take_attendance():
             cnt=0    
             for x in dehaze_imgnp:
                 img_loc = face_recognition.face_locations(x,number_of_times_to_upsample=3,model="hog")
-                img_enc = face_recognition.face_encodings(x,known_face_locations=img_loc,num_jitters=2)
+                img_enc = face_recognition.face_encodings(x,known_face_locations=img_loc,num_jitters=1)
                 face_img = PIL.Image.fromarray(x)
             #Face Tagging
                 unknown_faces_location = []
