@@ -233,6 +233,8 @@ def take_attendance():
                         absent_list["usn"].remove(absent_list["usn"][absent_list["name"].index(a)])
                         absent_list["name"].remove(a)
             stud_list["name"].append("Unknown Faces")
+            if cnt==-1:
+                cnt=0
             stud_list["usn"].append(cnt)
             st.subheader("Students detected from Uploaded Images are:")
             st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list["name"])+1)))
