@@ -143,7 +143,7 @@ def take_attendance():
     semester = st.selectbox("Select Class", options=[1, 2, 3, 4, 5, 6, 7, 8])
     section = st.selectbox("Select Section", options=["A", "B", "C", "D"])
     department = st.selectbox("Select department", options = ["CSE", "ISE", "ECE", "EEE", "AI&ML", "DS", "Mech", "Civil"])
-    shname= str(semester) + "|"+str(section) + "|"+str(department)
+    shname= str(semester) + "|"+str(section) +"|"+str(department) +"|"+str(now.strftime("%a|%d/%b/%Y|%H:%M"))
     option = st.radio("Select Option", ("Upload Image","Take Live Image"))
     if option == "Upload Image" or option == "Take Live Image":
         if option == "Upload Image":   
