@@ -63,7 +63,7 @@ def main():
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
         df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",ttl=10)
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-        st.write(pd.DataFrame(df,index=range(1, len(df))))    
+        st.write(pd.DataFrame(df,index=range(1, len(df["Name"])+1)))    
         
     if choice == "Take Attendance":
         take_attendance()
@@ -134,7 +134,7 @@ def manualattendance():
                 st.subheader("CONSOLIDATED REPORT")
                 st.write("Total Students Present: "+ str(totalp))
                 st.write("% Students Present: "+ str(percentp) + "%") 
-                st.write(pd.DataFrame(df,index=range(1, len(df))))
+                st.write(pd.DataFrame(df,index=range(1, len(df["Name"])+1)))
                 # Update the Google Sheets
                 conn.update(worksheet="REPORT CONSOLIDATED", data=df)
                 st.write("Attendance marked for "+ str(len(stud_list["name"])) + ".Check the updated [Google Sheets](%s)!!!" % url)
