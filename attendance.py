@@ -63,7 +63,7 @@ def main():
         st.write(str(now.strftime("%a|%d/%b/%Y|%H:%M")))
         df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",ttl=10)
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-        st.write(pd.DataFrame(df,index=range(1, len(df) + 1)))    
+        st.write(pd.DataFrame(df,index=range(1, len(df))))    
         
     if choice == "Take Attendance":
         take_attendance()
@@ -88,9 +88,9 @@ def manualattendance():
     }   
     if len(stud_list["name"])>0:
         st.subheader("Students detected are:")
-        st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list) + 1)))
+        st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list))))
         st.subheader("Absentee List:")
-        st.dataframe(pd.DataFrame(absent_list,index=range(1, len(absent_list) + 1)))    
+        st.dataframe(pd.DataFrame(absent_list,index=range(1, len(absent_list))))    
         st.write("Since there are "+ str(stud_list["usn"][-1]) + " unknown faces.")
         st.subheader("Manual Attendance")
         manual_attdn=st.multiselect("Choose the students to be included:",absent_list["name"])
@@ -100,7 +100,7 @@ def manualattendance():
                     ma_list["name"].append(ma)
                     ma_list["usn"].append(absent_list["usn"][absent_list["name"].index(ma)])
             st.subheader("Selected Students:")
-            st.dataframe(pd.DataFrame(ma_list,index=range(1, len(stud_list) + 1)))   
+            st.dataframe(pd.DataFrame(ma_list,index=range(1, len(stud_list))))   
             r=st.button("Confirm")
             if r:
                 stud_list["usn"].remove(stud_list["usn"][stud_list["name"].index("Unknown Faces")])    
@@ -112,11 +112,11 @@ def manualattendance():
                 for a in ma_list["usn"]:
                     if a not in stud_list["usn"]:   
                         stud_list["usn"].append(a)     
-                st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list) + 1)))
+                st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list))))
  
                 # shname = str(now.strftime("%a|%d/%b/%Y|%H:%M"))       
                 shname = st.session_state.shname
-                conn.create(worksheet=shname, data=pd.DataFrame(stud_list,index=range(1, len(stud_list) + 1)))
+                conn.create(worksheet=shname, data=pd.DataFrame(stud_list,index=range(1, len(stud_list))))
                 df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",ttl=30)
                 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
                 conn2 = st.connection("gsheets", type=GSheetsConnection,ttl=1)    
@@ -134,7 +134,7 @@ def manualattendance():
                 st.subheader("CONSOLIDATED REPORT")
                 st.write("Total Students Present: "+ str(totalp))
                 st.write("% Students Present: "+ str(percentp) + "%") 
-                st.write(pd.DataFrame(df,index=range(1, len(df) + 1)))
+                st.write(pd.DataFrame(df,index=range(1, len(df))))
                 # Update the Google Sheets
                 conn.update(worksheet="REPORT CONSOLIDATED", data=df)
                 st.write("Attendance marked for "+ str(len(stud_list["name"])) + ".Check the updated [Google Sheets](%s)!!!" % url)
