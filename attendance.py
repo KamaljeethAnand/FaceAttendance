@@ -151,7 +151,7 @@ def take_attendance():
             uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"],accept_multiple_files=True)
          # Read in the live image from camera
         elif option == "Take Live Image":
-            uploaded_file = st.camera_input("Choose an image file")
+            uploaded_file = st.camera_input("Choose an image file")    
         img=[]
         img_np=[]
         if uploaded_file is not None and len(uploaded_file) !=0:
@@ -191,7 +191,7 @@ def take_attendance():
             #Face Detection
             cnt=0    
             for x in dehaze_imgnp:
-                img_loc = face_recognition.face_locations(x,number_of_times_to_upsample=3,model="hog")
+                img_loc = face_recognition.face_locations(x,number_of_times_to_upsample=6,model="hog")
                 img_enc = face_recognition.face_encodings(x,known_face_locations=img_loc)
                 face_img = PIL.Image.fromarray(x)
             #Face Tagging
