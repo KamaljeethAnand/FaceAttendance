@@ -128,7 +128,9 @@ def manualattendance():
                 percentp=(totalp * 100 / (len(df["Name"].values)-2))    
                 df[shname].append(str(totalp))
                 df[shname].append(str(percentp))     
-                st.subheader("CONSOLIDATED REPORT")     
+                st.subheader("CONSOLIDATED REPORT")
+                st.write("Total Students Present: "+ str(totalp))
+                st.write("% Students Present: "+ str(percentp) + "%") 
                 st.write(pd.DataFrame(df))
                 # Update the Google Sheets
                 conn.update(worksheet="REPORT CONSOLIDATED", data=df)
