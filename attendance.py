@@ -172,7 +172,7 @@ def take_attendance():
                  x,y=k.split("_")   
                  absent_list["name"].append(x)
                  absent_list["usn"].append(y)
-            option = st.radio("Select Option", ("Select","DeHazing", "No Dehazing"))
+            option = st.radio("Select Option", ("Select Dehazing/No Dehazing","DeHazing", "No Dehazing"))
             if option == "Select":
                 input()
             elif option =="No Dehazing":
