@@ -1,5 +1,6 @@
 image-dehazer
 opencv-python-headless
+streamlit-authenticator
 retina-face
 numpy
 cmake
