@@ -128,7 +128,7 @@ if authentication_status:
                         ma_list["name"].append(ma)
                         ma_list["usn"].append(absent_list["usn"][absent_list["name"].index(ma)])
                 st.subheader("Selected Students:")
-                st.dataframe(pd.DataFrame(ma_list,index=range(1, len(manual_attdn))))   
+                st.dataframe(pd.DataFrame(ma_list,index=range(1, len(ma_list))))   
                 r=st.button("Confirm")
                 if r:
                     stud_list["usn"].remove(stud_list["usn"][stud_list["name"].index("Unknown Faces")])    
