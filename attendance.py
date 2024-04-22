@@ -166,7 +166,7 @@ if authentication_status:
                     # Update the Google Sheets
                     conn.update(worksheet="REPORT CONSOLIDATED", data=df)
                     st.write("Attendance marked for "+ str(len(stud_list["name"])) + ".Check the updated [Google Sheets](%s)!!!" % url)
-
+                    shname=" "
                     stud_list["name"]=[]
                     stud_list["usn"]=[]    
     def take_attendance():
