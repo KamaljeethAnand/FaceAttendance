@@ -119,7 +119,7 @@ if authentication_status:
             st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list["name"])+1)))
             st.subheader("Absentee List:")
             st.dataframe(pd.DataFrame(absent_list,index=range(1, len(absent_list["name"])+1)))    
-            st.write("Since there are "+ str(stud_list["usn"][-1]) + " unknown faces.")
+            # st.write("Since there are "+ str(stud_list["usn"][-1]) + " unknown faces.")
             st.subheader("Manual Attendance")
             manual_attdn=st.multiselect("Choose the students to be included:",absent_list["name"])
             if len(manual_attdn)>0:
@@ -131,8 +131,8 @@ if authentication_status:
                 st.dataframe(pd.DataFrame(ma_list,index=range(1, len(ma_list["name"])+1)))   
                 r=st.button("Confirm")
                 if r:
-                    stud_list["usn"].remove(stud_list["usn"][stud_list["name"].index("Unknown Faces")])    
-                    stud_list["name"].remove("Unknown Faces")     
+                    # stud_list["usn"].remove(stud_list["usn"][stud_list["name"].index("Unknown Faces")])    
+                    # stud_list["name"].remove("Unknown Faces")     
                     for a in ma_list["name"]:
                         if a not in stud_list["name"]:   
                             stud_list["name"].append(a)
@@ -222,7 +222,7 @@ if authentication_status:
                     st.image(dehaze_img,channels="RGB")
                 st.write("""Face Detection and Tagging in progress....""")
                 #Face Detection
-                cnt=-1    
+                # cnt=-1    
                 for x in dehaze_imgnp:
                     img_loc = face_recognition.face_locations(x,number_of_times_to_upsample=3,model="hog")
                     img_enc = face_recognition.face_encodings(x,known_face_locations=img_loc,num_jitters=1)
@@ -244,8 +244,8 @@ if authentication_status:
                             if a not in stud_list["name"]:
                                 stud_list["name"].append(a)
                                 stud_list["usn"].append(b)
-                        else:
-                            cnt=cnt+1
+                        # else:
+                            # cnt=cnt+1
                     # Draw and write on photo
                         top,right,bottom,left = img_loc[i]
                         draw = PIL.ImageDraw.Draw(face_img)
@@ -260,10 +260,10 @@ if authentication_status:
                     if a in absent_list["name"]:   
                             absent_list["usn"].remove(absent_list["usn"][absent_list["name"].index(a)])
                             absent_list["name"].remove(a)
-                stud_list["name"].append("Unknown Faces")
-                if cnt==-1:
-                    cnt=0
-                stud_list["usn"].append(cnt)
+                # stud_list["name"].append("Unknown Faces")
+                # if cnt==-1:
+                #     cnt=0
+                # stud_list["usn"].append(cnt)
                 st.subheader("Students detected from Uploaded Images are:")
                 st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list["name"])+1)))
                 st.subheader("Absentees:")
