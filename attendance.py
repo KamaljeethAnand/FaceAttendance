@@ -172,8 +172,8 @@ if authentication_status:
             # Read in the live image from camera
             elif option == "Take Live Image":
                 uploaded_file = st.camera_input("Choose an image file")    
-                img=[]
-                img_np=[]
+            img=[]
+            img_np=[]
             if uploaded_file is not None and len(uploaded_file) !=0:
                 for i in uploaded_file:
                     file_bytes = i.getvalue()
