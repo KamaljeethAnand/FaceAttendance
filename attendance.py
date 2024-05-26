@@ -176,7 +176,7 @@ if authentication_status:
                 uploaded_file=list()
                 pic = st.camera_input("Choose an image file")
                 uploaded_file.append(pic)
-            if uploaded_file is not None and len(uploaded_file) !=0:
+            elif uploaded_file is not None and len(uploaded_file) !=0:
                 for i in uploaded_file:
                     file_bytes = i.getvalue()
                     nparr = np.frombuffer(file_bytes, np.uint8)
