@@ -2,8 +2,8 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 from pathlib import Path
 import streamlit_authenticator as stauth
-import os
-import base64
+# import os
+# import base64
 import pickle
 import datetime
 import subprocess
@@ -18,7 +18,7 @@ import PIL.ImageFont
 from PIL import ImageOps
 import PIL.ImageDraw
 import image_dehazer
-import math
+# import math
 import dlib
 
 # --- USER AUTHENTICATION ---
