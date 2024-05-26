@@ -194,6 +194,7 @@ if authentication_status:
                         img_np.append(np.array(i))
                     dehaze_img=[]
                     dehaze_imgnp=[]
+                    final_images=[]
                     for i in dehaze_img:
                         dehaze_imgnp.append(np.array(i))
                 elif option == "DeHazing":
