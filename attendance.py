@@ -253,10 +253,6 @@ if authentication_status:
                     if a in absent_list["name"]:   
                             absent_list["usn"].remove(absent_list["usn"][absent_list["name"].index(a)])
                             absent_list["name"].remove(a)
-                # stud_list["name"].append("Unknown Faces")
-                # if cnt==-1:
-                #     cnt=0
-                # stud_list["usn"].append(cnt)
                 st.subheader("Students detected from Uploaded Images are:")
                 st.dataframe(pd.DataFrame(stud_list,index=range(1, len(stud_list["name"])+1)))
                 st.subheader("Absentees:")
@@ -265,22 +261,6 @@ if authentication_status:
                 st.session_state.sl = stud_list
                 st.session_state.al = absent_list
                 st.session_state.shname =shname
-                # with st.form("manattdn"):
-                #     manattdn=st.form_submit_button("Manual Attendance")
-                # if manattdn:
-                #     st.subheader("Manual Attendance")
-                #     with st.form("abslist"):
-                #         manual_attdn=st.multiselect("Choose the students to be included:",absent_list)
-                #         conf=st.form_submit_button("Confirm")
-                #     if conf: 
-                #         for ma in manual_attdn:
-                #             a,b=ma.split("_")
-                #         if a not in stud_list["name"]:
-                #             stud_list["name"].append(a)
-                #             stud_list["usn"].append(b)
-                #         st.subheader("List of Students after Manual Attendance:")
-                #         st.dataframe(pd.DataFrame(stud_list))
                 
-
     if __name__ == '__main__':
         main()
