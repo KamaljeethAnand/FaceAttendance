@@ -195,7 +195,7 @@ if authentication_status:
                     dehaze_img=[]
                     dehaze_imgnp=[]
                     final_images=[]
-                    for i in dehaze_img:
+                    for i in img_np:
                         dehaze_imgnp.append(np.array(i))
                         dehaze_img.append(Image.fromarray(i))
                     for i in dehaze_img:
