@@ -172,11 +172,11 @@ if authentication_status:
             # Read in the uploaded image
                 uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"],accept_multiple_files=True)
             # Read in the live image from camera
-            elif option == "Take Live Image":
+            if option == "Take Live Image":
                 uploaded_file=list()
                 pic = st.camera_input("Choose an image file")
                 uploaded_file.append(pic)
-            elif uploaded_file is not None and len(uploaded_file) !=0:
+            if uploaded_file is not None and len(uploaded_file) !=0:
                 for i in uploaded_file:
                     file_bytes = i.getvalue()
                     nparr = np.frombuffer(file_bytes, np.uint8)
