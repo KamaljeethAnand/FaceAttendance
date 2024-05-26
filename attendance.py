@@ -173,9 +173,7 @@ if authentication_status:
                 uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"],accept_multiple_files=True)
             # Read in the live image from camera
             elif option == "Take Live Image":
-                uploaded_file=[]
-                pic = st.camera_input("Choose an image file")
-                uploaded_file.append(pic)    
+                uploaded_file=list(st.camera_input("Choose an image file"))   
             if uploaded_file is not None and len(uploaded_file) !=0:
                 for i in uploaded_file:
                     file_bytes = i.getvalue()
