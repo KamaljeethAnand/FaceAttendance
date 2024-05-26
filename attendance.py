@@ -165,6 +165,8 @@ if authentication_status:
         department = st.selectbox("Select department", options = ["CSE", "ISE", "ECE", "EEE", "AI&ML", "DS", "Mech", "Civil"])
         shname= str(semester) + "|"+str(section) +"|"+str(department) +"|"+str(now.strftime("%a|%d/%b/%Y|%H:%M"))
         option = st.radio("Select Option", ("Upload Image","Take Live Image"))
+        img=[]
+        img_np=[]
         if option == "Upload Image" or option == "Take Live Image":
             if option == "Upload Image":   
             # Read in the uploaded image
@@ -173,8 +175,6 @@ if authentication_status:
             elif option == "Take Live Image":
                 uploaded_file=[]
                 uploaded_file.append(st.camera_input("Choose an image file"))    
-            img=[]
-            img_np=[]
             if uploaded_file is not None and len(uploaded_file) !=0:
                 for i in uploaded_file:
                     file_bytes = i.getvalue()
