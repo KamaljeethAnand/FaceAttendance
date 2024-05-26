@@ -197,6 +197,9 @@ if authentication_status:
                     final_images=[]
                     for i in dehaze_img:
                         dehaze_imgnp.append(np.array(i))
+                        dehaze_img.append(Image.fromarray(i))
+                    for i in dehaze_img:
+                        dehaze_imgnp.append(np.array(i)) 
                 elif option == "DeHazing":
                     st.write("""Please wait for image to be dehazed.""")
                     for i in img:
