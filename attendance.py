@@ -149,7 +149,7 @@ if authentication_status:
                     st.subheader("CONSOLIDATED REPORT")
                     st.write("Total Students Present: "+ str(totalp))
                     st.write("% Students Present: "+ str(percentp) + "%") 
-                    st.write(pd.DataFrame(df,index=range(1, len(df["Name"])+1)))
+                    st.write(pd.DataFrame(df,index=range(1, len(df["Name"]))))
                     # Updating the Google Sheets
                     conn.update(worksheet="REPORT CONSOLIDATED", data=df)
                     st.write("Attendance marked for "+ str(len(stud_list["name"])) + ".Check the updated [Google Sheets](%s)!!!" % url)
