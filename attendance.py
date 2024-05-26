@@ -167,7 +167,7 @@ if authentication_status:
         option = st.radio("Select Option", ("Upload Image","Take Live Image"))
         img=[]
         img_np=[]
-        if option == "Upload Image" or option == "Take Live Image":
+        if True:
             if option == "Upload Image":   
             # Read in the uploaded image
                 uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"],accept_multiple_files=True)
