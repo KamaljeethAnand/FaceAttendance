@@ -107,7 +107,8 @@ if authentication_status:
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
         manual_attdn=st.multiselect("Select Student:",df["Name"])
         if len(manual_attdn)>0:
-            st.write(manual_attdn["Name"])
+            for ma in manual_attdn:
+                st.write(ma["Name"])
 
         totalp = sum(1 for v in df["Name"] if v=="P")
         percentp=round(totalp * 100 / (len(df["Name"].values) - 1), 2)    
