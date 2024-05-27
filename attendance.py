@@ -105,7 +105,7 @@ if authentication_status:
     def reports():
         df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",usecols=[0,1,2],ttl=30)
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-        manual_attdn=st.multiselect("Select Student:",df["USN"])
+        manual_attdn=st.multiselect("Select Student:",df["Name"])
         if len(manual_attdn)>0:
             st.write(df["Name"][manual_attdn["Name"].index(manual_attdn)])
 
