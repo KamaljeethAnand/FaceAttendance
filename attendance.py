@@ -100,12 +100,6 @@ if authentication_status:
             manualattendance()
         if choice == "Reports":
             reports()
-    def get_row_by_name(sheet, name):
-        x=conn.read(spreadsheet=sheet,worksheet="REPORT CONSOLIDATED")
-        records = sheet.get_all_records()
-        names = [record['Name'].lower() for record in records]
-        index = names.index(name.lower())
-        return records[index]
     
     # Load existing encodings and student IDs
     def reports():
@@ -116,8 +110,8 @@ if authentication_status:
             for ma in manual_attdn:
                 x=df["Name"]
                 st.write(x)
-                x=get_row_by_name(sheet=url,name=ma)
-                st.write(x)
+                y=[df['Name'].lower() for ma in df]
+                st.write(y)
                 st.write(df.loc[df[0]])
                 # absent_list["usn"][absent_list["name"].index(ma)]
 
