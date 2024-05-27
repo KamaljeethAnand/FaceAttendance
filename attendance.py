@@ -112,7 +112,7 @@ if authentication_status:
                 cc=0
                 for a in df["Name"]:
                     if a==ma:
-                        st.write(df.loc[cnt])
+                        st.write(df.loc[cc])
                         break
                     else:
                         cc=cc+1
