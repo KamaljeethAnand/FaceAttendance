@@ -108,7 +108,7 @@ if authentication_status:
         manual_attdn=st.multiselect("Select Student:",df["Name"])
         if len(manual_attdn)>0:
             for ma in manual_attdn:
-                st.write(df["No of Days Present"])
+                st.write(df[2][df[0][manual_attdn]])
                 # absent_list["usn"][absent_list["name"].index(ma)]
 
         totalp = sum(1 for v in df["Name"] if v=="P")
