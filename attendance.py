@@ -101,7 +101,7 @@ if authentication_status:
         if choice == "Reports":
             reports()
     def get_row_by_name(sheet, name):
-        x=conn.connect(sheet)
+        x=conn.read(spreadsheet=sheet,worksheet="REPORT CONSOLIDATED")
         records = sheet.get_all_records()
         names = [record['Name'].lower() for record in records]
         index = names.index(name.lower())
