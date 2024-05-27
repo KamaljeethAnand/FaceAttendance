@@ -109,8 +109,13 @@ if authentication_status:
         if len(manual_attdn)>0:
             for ma in manual_attdn:
                 st.write(df.loc[0])
-                
-                st.write(df["Name"].index())
+                cc=0
+                for a in df["Name"]:
+                    if a==ma:
+                        st.write(df.loc[cnt])
+                        break
+                    else:
+                        cc=cc+1
                
 
         totalp = sum(1 for v in df["Name"] if v=="P")
