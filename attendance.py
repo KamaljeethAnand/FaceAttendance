@@ -72,7 +72,7 @@ if authentication_status:
         # st.title("Student Attendance System")
         authenticator.logout("Logout","sidebar")
         st.sidebar.title(f"Welcome {name}")
-        menu = ["Home","Take Attendance","Manual Attendance"]
+        menu = ["Home","Take Attendance","Manual Attendance","Reports"]
         choice = st.sidebar.selectbox("Select Option", menu)
 
         if choice == "Home":
@@ -98,8 +98,19 @@ if authentication_status:
         if choice == "Manual Attendance":
             st.title("Manual Attendance")    
             manualattendance()
+        if choice == "Reports":
+            reports()
 
     # Load existing encodings and student IDs
+    def reports():
+        df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",usecols=[0,1,2],ttl=30)
+        df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+        manual_attdn=st.multiselect("Select Student:",df["USN"])
+        if len(manual_attdn)>0:
+            st.write(df["Name"][manual_attdn["Name"].index(manual_attdn)])
+
+        totalp = sum(1 for v in df["Name"] if v=="P")
+        percentp=round(totalp * 100 / (len(df["Name"].values) - 1), 2)    
 
     def manualattendance():
         stud_list=st.session_state.sl
