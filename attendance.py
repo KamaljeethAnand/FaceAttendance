@@ -110,7 +110,7 @@ if authentication_status:
             for ma in manual_attdn:
                 x=df["Name"]
                 st.write(x)
-                st.write(df.loc[0])
+                st.write(df.loc[df["Name"].index(ma)])
                 # absent_list["usn"][absent_list["name"].index(ma)]
 
         totalp = sum(1 for v in df["Name"] if v=="P")
