@@ -100,7 +100,13 @@ if authentication_status:
             manualattendance()
         if choice == "Reports":
             reports()
-
+    def get_row_by_name(sheet, name):
+        x=conn.connect(sheet)
+        records = sheet.get_all_records()
+        names = [record['Name'].lower() for record in records]
+        index = names.index(name.lower())
+        return records[index]
+    
     # Load existing encodings and student IDs
     def reports():
         df = conn.read(spreadsheet=url,worksheet="REPORT CONSOLIDATED",usecols=[0,1,2],ttl=30)
