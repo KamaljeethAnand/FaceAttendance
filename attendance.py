@@ -110,7 +110,7 @@ if authentication_status:
             for ma in manual_attdn:
                 x=df["Name"]
                 st.write(x)
-                y=[df['Name'].lower() for ma in df]
+                y=[df['Name'] for ma in df]
                 st.write(y)
                 st.write(df.loc[df[0]])
                 # absent_list["usn"][absent_list["name"].index(ma)]
