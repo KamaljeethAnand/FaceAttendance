@@ -112,6 +112,7 @@ if authentication_status:
                 st.write(x)
                 y=[df["Name"].index(ma) for ma in df["Name"]]
                 st.write(y)
+                st.write(df.loc[0])
                 st.write(df.loc[df[0]])
                 # absent_list["usn"][absent_list["name"].index(ma)]
 
