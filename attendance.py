@@ -108,11 +108,10 @@ if authentication_status:
         manual_attdn=st.multiselect("Select Student:",df["Name"])
         if len(manual_attdn)>0:
             for ma in manual_attdn:
-                x=df["Name"]
-                st.write(x)
                 st.write(df.loc[0])
-                st.write(df.loc[df[0]])
-                # absent_list["usn"][absent_list["name"].index(ma)]
+                
+                st.write(df["Name"].index())
+               
 
         totalp = sum(1 for v in df["Name"] if v=="P")
         percentp=round(totalp * 100 / (len(df["Name"].values) - 1), 2)    
