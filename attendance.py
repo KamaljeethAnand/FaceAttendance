@@ -108,7 +108,7 @@ if authentication_status:
         manual_attdn=st.multiselect("Select Student:",df["Name"])
         if len(manual_attdn)>0:
             for ma in manual_attdn:
-                x=df["Name"].index(ma)
+                x=df["Name"][df["Name"].index(ma)]
                 st.write(x)
                 st.write(df.loc[0])
                 # absent_list["usn"][absent_list["name"].index(ma)]
