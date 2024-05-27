@@ -112,7 +112,7 @@ if authentication_status:
                 st.write(x)
                 x=get_row_by_name(sheet=url,name=ma)
                 st.write(x)
-                st.write(df.loc[df[])
+                st.write(df.loc[df[0])
                 # absent_list["usn"][absent_list["name"].index(ma)]
 
         totalp = sum(1 for v in df["Name"] if v=="P")
